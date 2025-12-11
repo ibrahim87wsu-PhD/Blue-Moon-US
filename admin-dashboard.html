@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Blue Moon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .admin-header {
+            background: #000;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-nav {
+            background: #333;
+            padding: 15px;
+        }
+        
+        .admin-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .admin-nav a:hover, .admin-nav a.active {
+            background: #b8860b;
+        }
+        
+        .admin-container {
+            display: flex;
+            min-height: calc(100vh - 120px);
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .card .number {
+            font-size: 2.5rem;
+            color: #b8860b;
+            font-weight: bold;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: #b8860b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #9c7009;
+        }
+        
+        .btn-secondary {
+            background: #666;
+        }
+        
+        .btn-secondary:hover {
+            background: #555;
+        }
+        
+        .products-list {
+            margin-top: 30px;
+        }
+        
+        .product-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-actions button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .btn-edit {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-delete {
+            background: #f44336;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h1>Blue Moon Admin Dashboard</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+    
+    <div class="admin-container">
+        <div class="sidebar">
+            <h3>Admin Menu</h3>
+            <ul style="list-style: none; margin-top: 20px;">
+                <li style="margin-bottom: 15px;">
+                    <a href="#" onclick="showSection('dashboard')" style="display: block; padding: 10px; background: #b8860b; color: white; text-decoration: none; border-radius: 5px;">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="#" onclick="showSection('addProduct')" style="display: block; padding: 10px; color: #333; text-decoration: none;">
+                        <i class="fas fa-plus-circle"></i> Add New Product
+                    </a>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="#" onclick="showSection('manageProducts')" style="display: block; padding: 10px; color: #333; text-decoration: none;">
+                        <i class="fas fa-box"></i> Manage Products
+                    </a>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="#" onclick="showSection('analytics')" style="display: block; padding: 10px; color: #333; text-decoration: none;">
+                        <i class="fas fa-chart-line"></i> Analytics
+                    </a>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="#" onclick="showSection('traffic')" style="display: block; padding: 10px; color: #333; text-decoration: none;">
+                        <i class="fas fa-users"></i> Traffic Management
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="section">
+                <h2>Dashboard Overview</h2>
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3>Total Products</h3>
+                        <div class="number" id="totalProducts">0</div>
+                    </div>
+                    <div class="card">
+                        <h3>Visitors Today</h3>
+                        <div class="number" id="visitorsToday">0</div>
+                    </div>
+                    <div class="card">
+                        <h3>Active Users</h3>
+                        <div class="number" id="activeUsers">0</div>
+                    </div>
+                    <div class="card">
+                        <h3>Server Load</h3>
+                        <div class="number" id="serverLoad">0%</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Quick Actions</h3>
+                    <div style="display: flex; gap: 15px; margin-top: 15px;">
+                        <button class="btn" onclick="showSection('addProduct')">
+                            <i class="fas fa-plus"></i> Add Product
+                        </button>
+                        <button class="btn btn-secondary" onclick="showSection('traffic')">
+                            <i class="fas fa-server"></i> Check Server Status
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add Product Section -->
+            <div id="addProduct" class="section" style="display: none;">
+                <h2>Add New Product</h2>
+                <form id="productForm">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="productDescription" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <input type="number" id="productPrice" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Original Price ($) - Optional</label>
+                        <input type="number" id="productOriginalPrice" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="productCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="mini-bags">Mini Bags</option>
+                            <option value="womens-shoes">Women's Shoes</option>
+                            <option value="leather-goods">Leather Goods</option>
+                            <option value="scarves">Scarves & Silk</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="url" id="productImage" placeholder="https://example.com/image.jpg" required>
+                    </div>
+                    
+                    <button type="submit" class="btn">Add Product</button>
+                    <button type="button" class="btn btn-secondary" onclick="showSection('dashboard')">Cancel</button>
+                </form>
+            </div>
+            
+            <!-- Manage Products Section -->
+            <div id="manageProducts" class="section" style="display: none;">
+                <h2>Manage Products</h2>
+                <div id="productsList" class="products-list">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Analytics Section -->
+            <div id="analytics" class="section" style="display: none;">
+                <h2>Website Analytics</h2>
+                <div class="card">
+                    <h3>Visitor Statistics</h3>
+                    <canvas id="visitorChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            
+            <!-- Traffic Management Section -->
+            <div id="traffic" class="section" style="display: none;">
+                <h2>Traffic & Server Management</h2>
+                
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3>Current Visitors</h3>
+                        <div class="number" id="currentVisitors">0</div>
+                        <p>Real-time active users</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Max Capacity</h3>
+                        <div class="number" id="maxCapacity">1000</div>
+                        <p>Maximum concurrent users</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Server Status</h3>
+                        <div class="number" id="serverStatus">Healthy</div>
+                        <p id="statusMessage" style="color: green;">All systems operational</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Traffic Controls</h3>
+                    <div style="margin-top: 20px;">
+                        <div class="form-group">
+                            <label>Set Maximum Concurrent Users</label>
+                            <input type="number" id="maxUsers" value="1000" min="100" max="10000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Enable Traffic Throttling</label>
+                            <select id="throttleMode">
+                                <option value="none">No Throttling</option>
+                                <option value="moderate">Moderate (Queue excess traffic)</option>
+                                <option value="strict">Strict (Block excess traffic)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Maintenance Mode</label>
+                            <select id="maintenanceMode">
+                                <option value="off">Off - Site Live</option>
+                                <option value="on">On - Site Under Maintenance</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn" onclick="updateTrafficSettings()">Update Settings</button>
+                        <button class="btn btn-secondary" onclick="clearTrafficData()">Clear Traffic Data</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Performance Monitor</h3>
+                    <div id="performanceMonitor">
+                        <p>Loading performance data...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Check if admin is logged in
+        if (!localStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'admin-login.html';
+        }
+
+        // Traffic monitoring variables
+        let currentVisitors = 0;
+        let maxCapacity = 1000;
+        let trafficData = [];
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Load data for specific sections
+            if (sectionId === 'dashboard') {
+                loadDashboardData();
+            } else if (sectionId === 'manageProducts') {
+                loadProducts();
+            } else if (sectionId === 'analytics') {
+                loadAnalytics();
+            } else if (sectionId === 'traffic') {
+                loadTrafficData();
+                startTrafficMonitor();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            window.location.href = 'admin-login.html';
+        }
+
+        // Load dashboard data
+        function loadDashboardData() {
+            // Load products count
+            const products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
+            document.getElementById('totalProducts').textContent = products.length;
+            
+            // Simulate visitor data
+            const todayVisitors = Math.floor(Math.random() * 500) + 100;
+            document.getElementById('visitorsToday').textContent = todayVisitors;
+            
+            // Simulate active users
+            const activeUsers = Math.floor(Math.random() * 100) + 10;
+            document.getElementById('activeUsers').textContent = activeUsers;
+            
+            // Server load
+            const serverLoad = Math.floor(Math.random() * 30) + 10;
+            document.getElementById('serverLoad').textContent = serverLoad + '%';
+        }
+
+        // Product management
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const product = {
+                id: Date.now(),
+                name: document.getElementById('productName').value,
+                description: document.getElementById('productDescription').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                originalPrice: parseFloat(document.getElementById('productOriginalPrice').value) || null,
+                category: document.getElementById('productCategory').value,
+                image: document.getElementById('productImage').value,
+                dateAdded: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            const products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
+            products.push(product);
+            localStorage.setItem('blueMoonProducts', JSON.stringify(products));
+            
+            // Clear form
+            document.getElementById('productForm').reset();
+            
+            alert('Product added successfully!');
+            
+            // Update main website products
+            updateMainWebsite();
+            
+            // Show dashboard
+            showSection('dashboard');
+        });
+
+        function loadProducts() {
+            const products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
+            const productsList = document.getElementById('productsList');
+            
+            if (products.length === 0) {
+                productsList.innerHTML = '<p>No products found. Add your first product!</p>';
+                return;
+            }
+            
+            productsList.innerHTML = products.map(product => `
+                <div class="product-item">
+                    <div>
+                        <h4>${product.name}</h4>
+                        <p>$${product.price} ${product.originalPrice ? `<del>$${product.originalPrice}</del>` : ''}</p>
+                        <small>Category: ${product.category}</small>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-edit" onclick="editProduct(${product.id})">Edit</button>
+                        <button class="btn-delete" onclick="deleteProduct(${product.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                let products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
+                products = products.filter(p => p.id !== productId);
+                localStorage.setItem('blueMoonProducts', JSON.stringify(products));
+                loadProducts();
+                updateMainWebsite();
+            }
+        }
+
+        function editProduct(productId) {
+            // Implementation for editing products
+            alert('Edit functionality would be implemented here');
+        }
+
+        // Update main website with new products
+        function updateMainWebsite() {
+            // In a real application, this would update your main website
+            // For now, we'll just log it
+            console.log('Main website should be updated with new products');
+            
+            // You would typically make an API call here to update your live site
+            // Or generate a static file that gets deployed
+        }
+
+        // Traffic Management Functions
+        function loadTrafficData() {
+            // Load saved settings
+            const savedMaxCapacity = localStorage.getItem('maxCapacity');
+            if (savedMaxCapacity) {
+                maxCapacity = parseInt(savedMaxCapacity);
+                document.getElementById('maxCapacity').textContent = maxCapacity;
+                document.getElementById('maxUsers').value = maxCapacity;
+            }
+            
+            // Load other settings
+            document.getElementById('throttleMode').value = localStorage.getItem('throttleMode') || 'none';
+            document.getElementById('maintenanceMode').value = localStorage.getItem('maintenanceMode') || 'off';
+        }
+
+        function startTrafficMonitor() {
+            // Simulate real-time traffic
+            setInterval(() => {
+                // Simulate visitor fluctuations
+                const change = Math.floor(Math.random() * 10) - 3;
+                currentVisitors = Math.max(0, currentVisitors + change);
+                
+                // Add some randomness
+                if (Math.random() > 0.7) {
+                    currentVisitors += Math.floor(Math.random() * 20);
+                }
+                
+                // Cap at max capacity
+                currentVisitors = Math.min(currentVisitors, maxCapacity * 1.2);
+                
+                // Update display
+                document.getElementById('currentVisitors').textContent = currentVisitors;
+                
+                // Check server status
+                checkServerStatus();
+                
+                // Store traffic data
+                trafficData.push({
+                    time: new Date().toLocaleTimeString(),
+                    visitors: currentVisitors
+                });
+                
+                // Keep only last 100 data points
+                if (trafficData.length > 100) {
+                    trafficData.shift();
+                }
+            }, 2000);
+        }
+
+        function checkServerStatus() {
+            const loadPercentage = (currentVisitors / maxCapacity) * 100;
+            const serverStatus = document.getElementById('serverStatus');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            if (loadPercentage > 90) {
+                serverStatus.textContent = 'Critical';
+                serverStatus.style.color = 'red';
+                statusMessage.textContent = 'High traffic - consider scaling up';
+                statusMessage.style.color = 'red';
+            } else if (loadPercentage > 70) {
+                serverStatus.textContent = 'High';
+                serverStatus.style.color = 'orange';
+                statusMessage.textContent = 'Moderate traffic';
+                statusMessage.style.color = 'orange';
+            } else {
+                serverStatus.textContent = 'Healthy';
+                serverStatus.style.color = 'green';
+                statusMessage.textContent = 'All systems operational';
+                statusMessage.style.color = 'green';
+            }
+            
+            // Update performance monitor
+            updatePerformanceMonitor();
+        }
+
+        function updateTrafficSettings() {
+            maxCapacity = parseInt(document.getElementById('maxUsers').value);
+            localStorage.setItem('maxCapacity', maxCapacity);
+            
+            const throttleMode = document.getElementById('throttleMode').value;
+            localStorage.setItem('throttleMode', throttleMode);
+            
+            const maintenanceMode = document.getElementById('maintenanceMode').value;
+            localStorage.setItem('maintenanceMode', maintenanceMode);
+            
+            alert('Traffic settings updated!');
+            
+            // Update display
+            document.getElementById('maxCapacity').textContent = maxCapacity;
+        }
+
+        function updatePerformanceMonitor() {
+            const monitor = document.getElementById('performanceMonitor');
+            const loadPercentage = (currentVisitors / maxCapacity) * 100;
+            
+            monitor.innerHTML = `
+                <div style="margin: 10px 0;">
+                    <strong>Server Load:</strong> ${loadPercentage.toFixed(1)}%
+                    <div style="background: #eee; height: 20px; border-radius: 10px; margin-top: 5px;">
+                        <div style="background: ${loadPercentage > 90 ? 'red' : loadPercentage > 70 ? 'orange' : 'green'}; 
+                             height: 100%; width: ${Math.min(loadPercentage, 100)}%; border-radius: 10px;"></div>
+                    </div>
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong>Response Time:</strong> ${(Math.random() * 100 + 50).toFixed(0)}ms
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong>Uptime:</strong> 99.9%
+                </div>
+            `;
+        }
+
+        function clearTrafficData() {
+            if (confirm('Clear all traffic data?')) {
+                trafficData = [];
+                currentVisitors = 0;
+                alert('Traffic data cleared!');
+            }
+        }
+
+        // Analytics Chart
+        function loadAnalytics() {
+            const ctx = document.getElementById('visitorChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Visitors',
+                        data: [1200, 1900, 1500, 2100, 1800, 2500, 2200],
+                        borderColor: '#b8860b',
+                        backgroundColor: 'rgba(184, 134, 11, 0.1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize
+        showSection('dashboard');
+    </script>
+</body>
+</html>
