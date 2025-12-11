@@ -3,96 +3,593 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blue Moon Admin</title>
+    <title>Admin Login - Blue Moon US</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
-        
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+
+        body {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            display: flex;
+            max-width: 1000px;
             width: 100%;
-            max-width: 400px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            min-height: 600px;
         }
-        
-        h1 {
+
+        /* Left Side - Branding */
+        .brand-side {
+            flex: 1;
+            background: linear-gradient(135deg, #000000 0%, #2c3e50 100%);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%234a90e2" opacity="0.1"/></svg>');
+            background-size: cover;
+        }
+
+        .logo {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #4a90e2;
+        }
+
+        .tagline {
+            position: relative;
+            z-index: 2;
+            font-size: 18px;
+            color: #b3b3b3;
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .features {
+            position: relative;
+            z-index: 2;
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 15px;
+        }
+
+        .features i {
+            color: #4a90e2;
+            font-size: 18px;
+            width: 25px;
+        }
+
+        .brand-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            right: 40px;
+            color: #666;
+            font-size: 13px;
             text-align: center;
+            z-index: 2;
+        }
+
+        /* Right Side - Login Form */
+        .login-side {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #ffffff;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h2 {
+            font-size: 28px;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .login-form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 18px;
+            z-index: 1;
+        }
+
+        .input-with-icon input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .input-with-icon input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 30px;
         }
-        
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #555;
         }
-        
-        button {
+
+        .forgot-password {
+            color: #4a90e2;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: #2c3e50;
+            text-decoration: underline;
+        }
+
+        .login-btn {
             width: 100%;
-            padding: 12px;
-            background: #000;
+            padding: 16px;
+            background: linear-gradient(135deg, #000000 0%, #2c3e50 100%);
             color: white;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 10px;
             font-size: 16px;
-            margin-top: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        
-        button:hover {
-            background: #333;
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
-        .error {
-            color: red;
+
+        .divider {
             text-align: center;
-            margin-top: 10px;
+            margin: 25px 0;
+            position: relative;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #e1e5e9;
+        }
+
+        .divider::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #e1e5e9;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .social-btn.google:hover {
+            border-color: #db4437;
+            background: #fef2f2;
+        }
+
+        .social-btn.github:hover {
+            border-color: #333;
+            background: #f5f5f5;
+        }
+
+        .login-footer {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .login-footer a {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error/Success Messages */
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .alert.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .alert.success {
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                max-width: 450px;
+            }
+            
+            .brand-side {
+                padding: 40px 30px;
+            }
+            
+            .login-side {
+                padding: 40px 30px;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h1>🔐 Blue Moon Admin</h1>
-        <input type="text" id="username" placeholder="Username" value="admin">
-        <input type="password" id="password" placeholder="Password" value="admin123">
-        <button onclick="login()">Login</button>
-        <div id="error" class="error"></div>
-        <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">
-            Default: admin / admin123
-        </p>
+    <div class="login-container">
+        <!-- Left Side - Branding -->
+        <div class="brand-side">
+            <div class="logo">
+                <h1>Blue<span>Moon</span> US</h1>
+            </div>
+            
+            <p class="tagline">
+                Secure Admin Portal for managing your Blue Moon US platform. 
+                Access analytics, user data, and system controls.
+            </p>
+            
+            <ul class="features">
+                <li><i class="fas fa-shield-alt"></i> Enterprise-grade security</li>
+                <li><i class="fas fa-chart-line"></i> Real-time analytics</li>
+                <li><i class="fas fa-user-cog"></i> User management</li>
+                <li><i class="fas fa-database"></i> Data insights</li>
+                <li><i class="fas fa-bell"></i> Notification system</li>
+            </ul>
+            
+            <div class="brand-footer">
+                © 2024 Blue Moon US Admin System. All rights reserved.
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="login-side">
+            <div class="login-header">
+                <h2>Admin Login</h2>
+                <p>Enter your credentials to access the dashboard</p>
+            </div>
+
+            <!-- Error/Success Messages -->
+            <div id="errorAlert" class="alert error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Invalid credentials. Please try again.</span>
+            </div>
+
+            <div id="successAlert" class="alert success">
+                <i class="fas fa-check-circle"></i>
+                <span id="successText">Login successful! Redirecting...</span>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username / Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Enter admin username or email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+
+                <div class="divider">Or continue with</div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn github">
+                        <i class="fab fa-github"></i> GitHub
+                    </button>
+                </div>
+
+                <div class="login-footer">
+                    <p>Need help? <a href="#">Contact System Administrator</a></p>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = togglePassword.querySelector('i');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+
+        // Form submission
+        const loginForm = document.getElementById('loginForm');
+        const errorAlert = document.getElementById('errorAlert');
+        const successAlert = document.getElementById('successAlert');
+        const errorText = document.getElementById('errorText');
+
+        // Demo credentials
+        const DEMO_CREDENTIALS = {
+            username: 'admin',
+            password: 'admin123',
+            email: 'admin@bluemoon.com'
+        };
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            if (username === 'admin' && password === 'admin123') {
-                // Redirect to dashboard
-                window.location.href = 'admin-dashboard.html';
-            } else {
-                document.getElementById('error').textContent = 'Invalid credentials. Use admin / admin123';
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            // Hide previous alerts
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
+
+            // Validation
+            if (!username || !password) {
+                showError('Please fill in all fields');
+                return;
             }
-        }
-        
-        // Press Enter to login
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                login();
+
+            // Check credentials (in a real app, this would be a server request)
+            const isValid = (
+                (username === DEMO_CREDENTIALS.username || username === DEMO_CREDENTIALS.email) &&
+                password === DEMO_CREDENTIALS.password
+            );
+
+            if (isValid) {
+                // Show success message
+                successAlert.style.display = 'flex';
+                
+                // Save to localStorage if "Remember me" is checked
+                if (rememberMe) {
+                    localStorage.setItem('adminUsername', username);
+                    localStorage.setItem('adminRemembered', 'true');
+                } else {
+                    localStorage.removeItem('adminUsername');
+                    localStorage.removeItem('adminRemembered');
+                }
+                
+                // Save session
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                sessionStorage.setItem('adminUsername', username);
+                
+                // Redirect to dashboard after 1.5 seconds
+                setTimeout(() => {
+                    window.location.href = 'admin-dashboard.html';
+                }, 1500);
+            } else {
+                showError('Invalid username or password. Try: admin / admin123');
             }
         });
+
+        function showError(message) {
+            errorText.textContent = message;
+            errorAlert.style.display = 'flex';
+            
+            // Shake animation for error
+            loginForm.style.animation = 'none';
+            setTimeout(() => {
+                loginForm.style.animation = 'shake 0.5s';
+            }, 10);
+            
+            // Remove animation after it plays
+            setTimeout(() => {
+                loginForm.style.animation = '';
+            }, 500);
+        }
+
+        // Check for remembered username
+        window.addEventListener('DOMContentLoaded', function() {
+            const remembered = localStorage.getItem('adminRemembered');
+            const savedUsername = localStorage.getItem('adminUsername');
+            
+            if (remembered && savedUsername) {
+                document.getElementById('username').value = savedUsername;
+                document.getElementById('rememberMe').checked = true;
+            }
+        });
+
+        // Forgot password
+        document.querySelector('.forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Please contact the system administrator at support@bluemoon.com to reset your password.');
+        });
+
+        // Social login buttons
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Social login integration would be implemented here.');
+            });
+        });
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
