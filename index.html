@@ -108,6 +108,7 @@
             transition: color 0.3s;
             padding: 5px 0;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -138,6 +139,7 @@
             margin-left: 20px;
             font-size: 1.2rem;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .header-icons a:hover {
@@ -334,9 +336,7 @@
             transition: all 0.3s;
             border-radius: 5px;
             overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            cursor: pointer;
         }
 
         .product-card:hover {
@@ -384,6 +384,40 @@
             margin-left: 10px;
         }
 
+        /* Dynamic Content Container */
+        #dynamicContent {
+            display: none;
+            min-height: 500px;
+        }
+
+        /* Product Details Modal */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 10001;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .product-modal-content {
+            background: white;
+            max-width: 1000px;
+            margin: 40px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Footer */
         footer {
             background-color: #000;
@@ -417,6 +451,7 @@
             color: #ccc;
             text-decoration: none;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .footer-column ul li a:hover {
@@ -540,6 +575,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .contact-item a:hover {
@@ -560,32 +596,6 @@
             border-top: 1px solid #333;
             font-size: 0.9rem;
             color: #999;
-        }
-
-        /* Help Section */
-        .help-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-        }
-
-        .help-section h5 {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-
-        .help-links a {
-            display: block;
-            color: #b8860b;
-            text-decoration: none;
-            margin-bottom: 8px;
-            transition: color 0.3s;
-        }
-
-        .help-links a:hover {
-            color: #ffd700;
-            text-decoration: underline;
         }
 
         /* Responsive Design */
@@ -655,6 +665,31 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 10003;
+            animation: slideIn 0.3s ease;
+            display: none;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -666,26 +701,26 @@
     <!-- Header & Navigation -->
     <header>
         <div class="container header-main">
-            <a href="index.html" class="logo">BLUE<span>MOON</span></a>
+            <a href="#" onclick="showHomePage()" class="logo">BLUE<span>MOON</span></a>
             
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
             
             <ul class="nav-links">
-                <li><a href="new-arrivals.html">New Arrivals</a></li>
-                <li><a href="designers.html">Designers</a></li>
-                <li><a href="women.html">Women</a></li>
-                <li><a href="men.html">Men</a></li>
-                <li><a href="beauty.html">Beauty</a></li>
-                <li><a href="accessories.html">Accessories</a></li>
-                <li><a href="sale.html">Sale</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" onclick="showPage('new-arrivals')">New Arrivals</a></li>
+                <li><a href="#" onclick="showPage('designers')">Designers</a></li>
+                <li><a href="#" onclick="showPage('women')">Women</a></li>
+                <li><a href="#" onclick="showPage('men')">Men</a></li>
+                <li><a href="#" onclick="showPage('beauty')">Beauty</a></li>
+                <li><a href="#" onclick="showPage('accessories')">Accessories</a></li>
+                <li><a href="#" onclick="showPage('sale')">Sale</a></li>
+                <li><a href="#" onclick="scrollToContact()">Contact</a></li>
             </ul>
             
             <div class="header-icons">
                 <a href="#" onclick="showSearch()"><i class="fas fa-search"></i></a>
-                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="#" onclick="showAccount()"><i class="fas fa-user"></i></a>
                 <a href="#" onclick="showCart()"><i class="fas fa-shopping-bag"></i></a>
             </div>
         </div>
@@ -694,130 +729,125 @@
     <!-- Promo Banner -->
     <section class="promo-banner">
         <div class="container">
-            <p><span class="highlight">FRIENDS & FAMILY:</span> 3 ways to save on top brands that make the best gifts! <span id="promo-date">Ends December 12!</span> <a href="sale.html" style="color:#ffd700; text-decoration:underline;">Shop Now</a></p>
+            <p><span class="highlight">FRIENDS & FAMILY:</span> 3 ways to save on top brands that make the best gifts! <span id="promo-date">Ends December 12!</span> <a href="#" onclick="showPage('sale')" style="color:#ffd700; text-decoration:underline;">Shop Now</a></p>
         </div>
     </section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Luxury Meets Style</h1>
-            <p>Discover exclusive collections crafted with Blue Moon's signature elegance. Luxury fashion—redefined, refined, and made for everyone.</p>
-            <a href="#products" class="btn">SHOP THE COLLECTION</a>
-        </div>
-    </section>
+    <!-- Main Home Content -->
+    <div id="mainContent">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Luxury Meets Style</h1>
+                <p>Discover exclusive collections crafted with Blue Moon's signature elegance. Luxury fashion—redefined, refined, and made for everyone.</p>
+                <a href="#products" class="btn">SHOP THE COLLECTION</a>
+            </div>
+        </section>
 
-    <!-- Offers Section -->
-    <section class="offers">
-        <div class="container">
-            <h2 class="section-title">Exclusive Offers</h2>
-            <div class="offer-cards">
-                <div class="offer-card">
-                    <div class="badge">ENDS TOMORROW</div>
-                    <h3>30% OFF</h3>
-                    <p>Regular & already-reduced prices</p>
-                    <a href="sale.html" class="btn">SHOP NOW</a>
+        <!-- Offers Section -->
+        <section class="offers">
+            <div class="container">
+                <h2 class="section-title">Exclusive Offers</h2>
+                <div class="offer-cards">
+                    <div class="offer-card">
+                        <div class="badge">ENDS TOMORROW</div>
+                        <h3>30% OFF</h3>
+                        <p>Regular & already-reduced prices</p>
+                        <a href="#" onclick="showPage('sale')" class="btn">SHOP NOW</a>
+                    </div>
+                    <div class="offer-card">
+                        <div class="badge">BEAUTY & FRAGRANCE</div>
+                        <h3>15% OFF</h3>
+                        <p>Your holiday glam. Shop makeup, skin care, hair care, perfume & cologne.</p>
+                        <a href="#" onclick="showPage('beauty')" class="btn">SHOP BEAUTY</a>
+                    </div>
+                    <div class="offer-card">
+                        <div class="badge">STAR MONEY</div>
+                        <h3>$20 IN STAR MONEY</h3>
+                        <p>Per every $100 spent* on eligible brands</p>
+                        <a href="#" class="btn" onclick="showStarMoneyInfo()">LEARN MORE</a>
+                    </div>
                 </div>
-                <div class="offer-card">
-                    <div class="badge">BEAUTY & FRAGRANCE</div>
-                    <h3>15% OFF</h3>
-                    <p>Your holiday glam. Shop makeup, skin care, hair care, perfume & cologne.</p>
-                    <a href="beauty.html" class="btn">SHOP BEAUTY</a>
-                </div>
-                <div class="offer-card">
-                    <div class="badge">STAR MONEY</div>
-                    <h3>$20 IN STAR MONEY</h3>
-                    <p>Per every $100 spent* on eligible brands</p>
-                    <a href="#" class="btn" onclick="showStarMoneyInfo()">LEARN MORE</a>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Categories Section -->
-    <section class="categories">
-        <div class="container">
-            <h2 class="section-title">Shop By Category</h2>
-            <div class="category-grid">
-                <a href="new-arrivals.html" class="category-item">
-                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="New Arrivals">
-                    <div class="category-overlay">
-                        <h3>New Arrivals</h3>
-                        <p>Latest Luxury Collections</p>
+        <!-- Categories Section -->
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">Shop By Category</h2>
+                <div class="category-grid">
+                    <div class="category-item" onclick="showPage('new-arrivals')">
+                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="New Arrivals">
+                        <div class="category-overlay">
+                            <h3>New Arrivals</h3>
+                            <p>Latest Luxury Collections</p>
+                        </div>
                     </div>
-                </a>
-                <a href="women.html" class="category-item">
-                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Women's Collection">
-                    <div class="category-overlay">
-                        <h3>Women's Collection</h3>
-                        <p>Designer Bags & Shoes</p>
+                    <div class="category-item" onclick="showPage('women')">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Women's Collection">
+                        <div class="category-overlay">
+                            <h3>Women's Collection</h3>
+                            <p>Designer Bags & Shoes</p>
+                        </div>
                     </div>
-                </a>
-                <a href="men.html" class="category-item">
-                    <img src="https://images.unsplash.com/photo-1592878940526-0211fdd21c2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Men's Collection">
-                    <div class="category-overlay">
-                        <h3>Men's Collection</h3>
-                        <p>Premium Accessories</p>
+                    <div class="category-item" onclick="showPage('men')">
+                        <img src="https://images.unsplash.com/photo-1592878940526-0211fdd21c2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Men's Collection">
+                        <div class="category-overlay">
+                            <h3>Men's Collection</h3>
+                            <p>Premium Accessories</p>
+                        </div>
                     </div>
-                </a>
-                <a href="beauty.html" class="category-item">
-                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beauty & Fragrance">
-                    <div class="category-overlay">
-                        <h3>Beauty & Fragrance</h3>
-                        <p>Luxury Cosmetics</p>
+                    <div class="category-item" onclick="showPage('beauty')">
+                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beauty & Fragrance">
+                        <div class="category-overlay">
+                            <h3>Beauty & Fragrance</h3>
+                            <p>Luxury Cosmetics</p>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
-        <div class="container">
-            <h2 class="section-title">Featured Products</h2>
-            <div class="product-grid">
-                <a href="product-details.html?product=1" class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="GG Marmont Mini Bag">
-                    </div>
-                    <div class="product-info">
-                        <h4>GG Marmont Mini Bag</h4>
-                        <div class="product-price">$980 <span class="original-price">$1,200</span></div>
-                    </div>
-                </a>
-                <a href="product-details.html?product=2" class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Designer Sneakers">
-                    </div>
-                    <div class="product-info">
-                        <h4>Designer Platform Sneakers</h4>
-                        <div class="product-price">$650</div>
-                    </div>
-                </a>
-                <a href="product-details.html?product=3" class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Men's Wallet">
-                    </div>
-                    <div class="product-info">
-                        <h4>Men's Leather Bifold Wallet</h4>
-                        <div class="product-price">$320 <span class="original-price">$400</span></div>
-                    </div>
-                </a>
-                <a href="product-details.html?product=4" class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Silk Scarf">
-                    </div>
-                    <div class="product-info">
-                        <h4>Floral Silk Scarf</h4>
-                        <div class="product-price">$280</div>
-                    </div>
-                </a>
+        <!-- Products Section -->
+        <section class="products" id="products">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="product-grid" id="featuredProducts">
+                    <!-- Products will be loaded here -->
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" onclick="showPage('shop-all')" class="btn">VIEW ALL PRODUCTS</a>
+                </div>
             </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="shop-all.html" class="btn">VIEW ALL PRODUCTS</a>
-            </div>
+        </section>
+    </div>
+
+    <!-- Dynamic Content Container (for other pages) -->
+    <div id="dynamicContent"></div>
+
+    <!-- Product Details Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="product-modal-content" id="productModalContent">
+            <!-- Product details will be loaded here -->
         </div>
-    </section>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="product-modal" id="cartModal">
+        <div class="product-modal-content" id="cartModalContent">
+            <!-- Cart content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="product-modal" id="adminModal">
+        <div class="product-modal-content" id="adminModalContent">
+            <!-- Admin panel will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
 
     <!-- Footer -->
     <footer id="contact-info">
@@ -853,20 +883,20 @@
                 <div class="footer-column">
                     <h4>SHOP</h4>
                     <ul>
-                        <li><a href="new-arrivals.html">New Arrivals</a></li>
-                        <li><a href="women.html">Women's Collection</a></li>
-                        <li><a href="men.html">Men's Collection</a></li>
-                        <li><a href="beauty.html">Beauty & Fragrance</a></li>
-                        <li><a href="accessories.html">Accessories</a></li>
-                        <li><a href="sale.html">Sale</a></li>
-                        <li><a href="designers.html">Designers</a></li>
+                        <li><a href="#" onclick="showPage('new-arrivals')">New Arrivals</a></li>
+                        <li><a href="#" onclick="showPage('women')">Women's Collection</a></li>
+                        <li><a href="#" onclick="showPage('men')">Men's Collection</a></li>
+                        <li><a href="#" onclick="showPage('beauty')">Beauty & Fragrance</a></li>
+                        <li><a href="#" onclick="showPage('accessories')">Accessories</a></li>
+                        <li><a href="#" onclick="showPage('sale')">Sale</a></li>
+                        <li><a href="#" onclick="showPage('designers')">Designers</a></li>
                     </ul>
                 </div>
 
                 <!-- Help Column -->
                 <div class="footer-column">
                     <h4>DO YOU NEED HELP?</h4>
-                    <div class="help-section">
+                    <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
                             <div>
@@ -878,23 +908,22 @@
                             <i class="fab fa-whatsapp"></i>
                             <div>
                                 <p><strong>Write us on WhatsApp</strong></p>
-                                <a href="https://wa.me/1000-000-0000">+1 (000)-000-0000</a>
+                                <a href="https://wa.me/1-000-000-0000">+1 (000)-000-0000</a>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-comments"></i>
                             <div>
                                 <p><strong>Chat with our Client Service</strong></p>
-                                <a href="contact.html">Start Chat</a>
+                                <a href="#" onclick="showChat()">Start Chat</a>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="help-links" style="margin-top: 20px;">
-                        <a href="faq.html">FAQ</a>
-                        <a href="sitemap.html">Sitemap</a>
-                        <a href="track-order.html">Track your order</a>
-                        <a href="returns.html">Returns</a>
+                    <div style="margin-top: 20px;">
+                        <a href="#" onclick="showFaq()" style="display: block; color: #b8860b; margin-bottom: 8px;">FAQ</a>
+                        <a href="#" onclick="showPage('returns')" style="display: block; color: #b8860b; margin-bottom: 8px;">Returns</a>
+                        <a href="#" onclick="showTrackOrder()" style="display: block; color: #b8860b; margin-bottom: 8px;">Track your order</a>
                     </div>
                 </div>
 
@@ -902,20 +931,18 @@
                 <div class="footer-column">
                     <h4>COMPANY</h4>
                     <ul>
-                        <li><a href="about.html">About Blue Moon</a></li>
-                        <li><a href="sustainability.html">Sustainability</a></li>
-                        <li><a href="careers.html">Work with us</a></li>
-                        <li><a href="stores.html">Store Locator</a></li>
+                        <li><a href="#" onclick="showAbout()">About Blue Moon</a></li>
+                        <li><a href="#" onclick="showSustainability()">Sustainability</a></li>
+                        <li><a href="#" onclick="showCareers()">Work with us</a></li>
+                        <li><a href="#" onclick="showStores()">Store Locator</a></li>
                     </ul>
                     
                     <div style="margin-top: 20px;">
                         <h5>LEGAL TERMS</h5>
-                        <div class="help-links">
-                            <a href="legal-notice.html">Legal Notice</a>
-                            <a href="privacy.html">Privacy Statement</a>
-                            <a href="cookie-policy.html">Cookie Policy</a>
-                            <a href="#" onclick="showCookieSettings()">Cookie settings</a>
-                            <a href="terms.html">Terms of sale</a>
+                        <div>
+                            <a href="#" onclick="showLegalNotice()" style="display: block; color: #b8860b; margin-bottom: 8px; font-size: 0.9rem;">Legal Notice</a>
+                            <a href="#" onclick="showPrivacy()" style="display: block; color: #b8860b; margin-bottom: 8px; font-size: 0.9rem;">Privacy Statement</a>
+                            <a href="#" onclick="showCookieSettings()" style="display: block; color: #b8860b; margin-bottom: 8px; font-size: 0.9rem;">Cookie settings</a>
                         </div>
                     </div>
                 </div>
@@ -924,11 +951,11 @@
             <!-- Footer Bottom -->
             <div class="footer-bottom">
                 <p style="margin-bottom: 10px;">
-                    Shipping to: <select style="background: transparent; color: #ccc; border: 1px solid #666; padding: 5px; border-radius: 3px;">
-                        <option>United States/English</option>
-                        <option>Canada/English</option>
-                        <option>United Kingdom/English</option>
-                        <option>France/Français</option>
+                    Shipping to: 
+                    <select id="countrySelect" style="background: transparent; color: #ccc; border: 1px solid #666; padding: 5px; border-radius: 3px; margin-left: 10px;">
+                        <option value="US">United States/English</option>
+                        <option value="CA">Canada/English</option>
+                        <option value="UK">United Kingdom/English</option>
                     </select>
                 </p>
                 <p>&copy; BLUE MOON 2021 - 2025 | Luxury Fashion E-commerce</p>
@@ -956,7 +983,7 @@
 
     <script>
         // ==============================
-        // E-COMMERCE SYSTEM
+        // E-COMMERCE SYSTEM - SINGLE PAGE
         // ==============================
 
         // ADMIN SETTINGS
@@ -968,420 +995,5 @@
         // SHOPPING CART
         let shoppingCart = [];
 
-        // Load saved data
-        function loadSavedData() {
-            const savedSettings = localStorage.getItem('blueMoonAdminSettings');
-            if (savedSettings) {
-                adminSettings = JSON.parse(savedSettings);
-            }
-            
-            const savedCart = localStorage.getItem('blueMoonShoppingCart');
-            if (savedCart) {
-                shoppingCart = JSON.parse(savedCart);
-                updateCartCount();
-            }
-        }
-
-        function saveCart() {
-            localStorage.setItem('blueMoonShoppingCart', JSON.stringify(shoppingCart));
-            updateCartCount();
-        }
-
-        function updateCartCount() {
-            const totalItems = shoppingCart.reduce((total, item) => total + item.quantity, 0);
-            const cartCount = document.getElementById('cartCount');
-            const cartIcon = document.getElementById('cartIcon');
-            
-            if (cartCount) {
-                cartCount.textContent = totalItems;
-            }
-            if (cartIcon) {
-                cartIcon.style.display = totalItems > 0 ? 'block' : 'none';
-            }
-        }
-
-        // Initialize
-        loadSavedData();
-
-        // ==============================
-        // NAVIGATION & MOBILE MENU
-        // ==============================
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navLinks = document.querySelector('.nav-links');
-            const mobileBtn = document.querySelector('.mobile-menu-btn');
-            
-            if (!navLinks.contains(event.target) && !mobileBtn.contains(event.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId.startsWith('#')) {
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                            // Close mobile menu if open
-                            document.querySelector('.nav-links').classList.remove('active');
-                        }
-                    }
-                }
-            });
-        });
-
-        // ==============================
-        // NEWSLETTER FORM
-        // ==============================
-        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('newsletterEmail').value;
-            const errorElement = document.getElementById('emailError');
-            
-            if (!email) {
-                errorElement.style.display = 'block';
-                return;
-            }
-            
-            errorElement.style.display = 'none';
-            
-            // Save subscription
-            const subscriptions = JSON.parse(localStorage.getItem('blueMoonNewsletter') || '[]');
-            subscriptions.push({
-                email: email,
-                date: new Date().toISOString()
-            });
-            localStorage.setItem('blueMoonNewsletter', JSON.stringify(subscriptions));
-            
-            // Show success message
-            alert('Thank you for subscribing to our newsletter! You will receive exclusive offers and updates.');
-            
-            // Reset form
-            this.reset();
-        });
-
-        // ==============================
-        // PRODUCT FUNCTIONS
-        // ==============================
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Prevent clicking if clicking on a link within the card
-                if (e.target.tagName === 'A' || e.target.closest('a')) {
-                    return;
-                }
-                
-                // Get product info
-                const productName = this.querySelector('h4').textContent;
-                const productPrice = this.querySelector('.product-price').textContent.replace('$', '').replace(/[^\d.]/g, '');
-                
-                // For now, just add to cart
-                // In real implementation, this would go to product details page
-                addToCart(productName, parseFloat(productPrice));
-            });
-        });
-
-        function addToCart(productName, productPrice) {
-            // Check if product already in cart
-            const existingItem = shoppingCart.find(item => item.name === productName);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                shoppingCart.push({
-                    id: Date.now(),
-                    name: productName,
-                    price: productPrice,
-                    quantity: 1,
-                    date: new Date().toISOString()
-                });
-            }
-            
-            saveCart();
-            
-            // Show cart icon animation
-            const cartIcon = document.getElementById('cartIcon');
-            if (cartIcon) {
-                cartIcon.style.animation = 'none';
-                setTimeout(() => {
-                    cartIcon.style.animation = 'bounce 0.5s';
-                }, 10);
-            }
-            
-            // Show success message
-            showNotification(`✅ Added "${productName}" to your cart!`);
-        }
-
-        function showCart() {
-            if (shoppingCart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            
-            // Calculate totals
-            const subtotal = shoppingCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal > 100 ? 0 : 15;
-            const tax = subtotal * 0.08;
-            const total = subtotal + shipping + tax;
-            
-            // Create cart modal
-            const cartModal = document.createElement('div');
-            cartModal.innerHTML = `
-                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10002; display: flex; justify-content: center; align-items: center; padding: 20px;">
-                    <div style="background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;">
-                        <h2 style="color: #000; margin-bottom: 20px;">🛍️ Your Shopping Cart</h2>
-                        
-                        <div id="cartItems" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
-                            ${shoppingCart.map((item, index) => `
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; margin-bottom: 10px; background: #f9f9f9; border-radius: 8px;">
-                                    <div>
-                                        <strong>${item.name}</strong><br>
-                                        <span style="color: #b8860b; font-weight: bold;">$${item.price.toFixed(2)} each</span>
-                                    </div>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <button onclick="updateQuantity(${index}, -1)" style="background: #666; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">-</button>
-                                        <span style="font-weight: bold; min-width: 30px; text-align: center;">${item.quantity}</span>
-                                        <button onclick="updateQuantity(${index}, 1)" style="background: #b8860b; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">+</button>
-                                        <span style="font-weight: bold; color: #000; margin-left: 15px;">$${(item.price * item.quantity).toFixed(2)}</span>
-                                        <button onclick="removeFromCart(${index})" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-left: 10px;">Remove</button>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        
-                        <div style="border-top: 2px solid #eee; padding-top: 20px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span>Subtotal:</span>
-                                <span>$${subtotal.toFixed(2)}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span>Shipping:</span>
-                                <span>${shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span>Tax (8%):</span>
-                                <span>$${tax.toFixed(2)}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2em; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">
-                                <span>Total:</span>
-                                <span style="color: #b8860b;">$${total.toFixed(2)}</span>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; gap: 10px; margin-top: 25px;">
-                            <button onclick="proceedToCheckout()" style="background: #b8860b; color: white; border: none; padding: 15px 25px; border-radius: 5px; cursor: pointer; flex: 2; font-size: 16px; font-weight: bold;">
-                                🛒 Proceed to Checkout
-                            </button>
-                            <button onclick="cartModal.remove()" style="background: #666; color: white; border: none; padding: 15px 25px; border-radius: 5px; cursor: pointer; flex: 1;">
-                                Continue Shopping
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(cartModal);
-        }
-
-        function updateQuantity(index, change) {
-            shoppingCart[index].quantity += change;
-            
-            if (shoppingCart[index].quantity <= 0) {
-                shoppingCart.splice(index, 1);
-            }
-            
-            saveCart();
-            
-            // Refresh cart display
-            document.querySelectorAll('div').forEach(el => {
-                if (el.innerHTML.includes('Your Shopping Cart')) {
-                    el.remove();
-                }
-            });
-            
-            if (shoppingCart.length > 0) {
-                showCart();
-            } else {
-                showNotification('Cart is now empty!');
-            }
-        }
-
-        function removeFromCart(index) {
-            if (confirm('Remove this item from cart?')) {
-                shoppingCart.splice(index, 1);
-                saveCart();
-                
-                // Refresh cart display
-                document.querySelectorAll('div').forEach(el => {
-                    if (el.innerHTML.includes('Your Shopping Cart')) {
-                        el.remove();
-                    }
-                });
-                
-                if (shoppingCart.length > 0) {
-                    showCart();
-                } else {
-                    showNotification('Item removed from cart!');
-                }
-            }
-        }
-
-        function proceedToCheckout() {
-            alert('Checkout functionality would be implemented here with payment gateway integration.');
-            // In real implementation, this would redirect to checkout page
-        }
-
-        // ==============================
-        // ADMIN PANEL
-        // ==============================
-        function showAdminPrompt() {
-            const password = prompt("Enter admin password:");
-            if (password === adminSettings.password) {
-                showAdminPanel();
-            } else if (password) {
-                alert("Incorrect password.");
-            }
-        }
-
-        function showAdminPanel() {
-            const panel = document.createElement('div');
-            panel.innerHTML = `
-                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10001; display: flex; justify-content: center; align-items: center;">
-                    <div style="background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;">
-                        <h2 style="color: #000; margin: 0 0 20px 0;">Blue Moon Admin Panel</h2>
-                        <p style="color: #666; margin-bottom: 20px;">Manage your store, products, and settings</p>
-                        
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                            <button onclick="window.location.href='admin-products.html'" style="background: #b8860b; color: white; border: none; padding: 15px; border-radius: 5px; cursor: pointer; text-align: center;">
-                                <i class="fas fa-box" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                                Manage Products
-                            </button>
-                            <button onclick="window.location.href='admin-orders.html'" style="background: #666; color: white; border: none; padding: 15px; border-radius: 5px; cursor: pointer; text-align: center;">
-                                <i class="fas fa-shopping-cart" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                                View Orders
-                            </button>
-                        </div>
-                        
-                        <div style="margin: 20px 0;">
-                            <h3 style="color: #333; margin-bottom: 15px;">Quick Actions</h3>
-                            <button onclick="addQuickProduct()" style="background: #b8860b; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px; margin-bottom: 10px;">
-                                <i class="fas fa-plus"></i> Add Product
-                            </button>
-                            <button onclick="viewAnalytics()" style="background: #666; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 10px;">
-                                <i class="fas fa-chart-line"></i> View Analytics
-                            </button>
-                        </div>
-                        
-                        <button onclick="panel.remove()" style="background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px;">
-                            Close Admin Panel
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(panel);
-        }
-
-        function addQuickProduct() {
-            alert('Quick product add feature would open here.');
-        }
-
-        function viewAnalytics() {
-            alert('Analytics dashboard would open here.');
-        }
-
-        // ==============================
-        // HELPER FUNCTIONS
-        // ==============================
-        function showNotification(message) {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #4CAF50;
-                color: white;
-                padding: 15px 20px;
-                border-radius: 5px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                z-index: 10003;
-                animation: slideIn 0.3s ease;
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-
-        function showStarMoneyInfo() {
-            alert('Star Money Program:\n\nEarn $20 in Star Money for every $100 spent on eligible items.\nStar Money can be used on future purchases.\nValid through December 31, 2025.\nExclusions apply to clearance and select designer items.');
-        }
-
-        function showCookieSettings() {
-            alert('Cookie settings would open here. Users can manage their cookie preferences.');
-        }
-
-        function showSearch() {
-            const searchTerm = prompt('Enter search term:');
-            if (searchTerm) {
-                alert(`Searching for: ${searchTerm}\n\nIn a real implementation, this would show search results.`);
-            }
-        }
-
-        // Update promo date
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update promo date to always be tomorrow
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            const formattedDate = tomorrow.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-            const promoDateElement = document.getElementById('promo-date');
-            if (promoDateElement) {
-                promoDateElement.textContent = `Ends ${formattedDate}!`;
-            }
-            
-            // Add CSS for animations
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOut {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-        });
-
-        // Make current page active in navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                const linkHref = link.getAttribute('href');
-                if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        // PRODUCTS DATABASE
+        let all
