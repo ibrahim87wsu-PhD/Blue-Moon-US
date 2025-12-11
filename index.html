@@ -6,6 +6,22 @@
     <title>Blue Moon | Luxury Fashion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Blue Moon Luxury Fashion - Premium designer fashion combining elegance with accessibility. Shop luxury bags, shoes, accessories with exclusive offers.">
+    <meta name="keywords" content="luxury fashion, designer bags, premium accessories, luxury shoes, online shopping, e-commerce, fashion store">
+    <meta name="author" content="Blue Moon Luxury Fashion">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="Blue Moon Luxury Fashion">
+    <meta property="og:description" content="Premium designer fashion combining elegance with accessibility">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://www.bluemoon.us.com/">
+    <meta property="og:type" content="website">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blue Moon Luxury Fashion">
+    <meta name="twitter:description" content="Premium designer fashion combining elegance with accessibility">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     <style>
         * {
             margin: 0;
@@ -90,10 +106,26 @@
             font-weight: 500;
             font-size: 0.95rem;
             transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
         }
 
         .nav-links a:hover {
             color: #b8860b;
+        }
+
+        .nav-links a.active {
+            color: #b8860b;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #b8860b;
         }
 
         .header-icons {
@@ -105,6 +137,11 @@
             color: white;
             margin-left: 20px;
             font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .header-icons a:hover {
+            color: #b8860b;
         }
 
         .mobile-menu-btn {
@@ -166,13 +203,15 @@
             text-decoration: none;
             font-weight: 600;
             letter-spacing: 1px;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
         }
 
         .btn:hover {
             background-color: #9c7009;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.3);
         }
 
         /* Offers Section */
@@ -246,6 +285,9 @@
             overflow: hidden;
             height: 300px;
             cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            text-decoration: none;
         }
 
         .category-item img {
@@ -289,11 +331,17 @@
         .product-card {
             background-color: white;
             border: 1px solid #eee;
-            transition: box-shadow 0.3s;
+            transition: all 0.3s;
+            border-radius: 5px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .product-card:hover {
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
         }
 
         .product-img {
@@ -305,6 +353,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
         }
 
         .product-info {
@@ -370,33 +423,87 @@
             color: #b8860b;
         }
 
-        .newsletter h4 {
+        /* Newsletter Styles */
+        .newsletter-form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form-container h4 {
             color: white;
             margin-bottom: 15px;
         }
 
-        .newsletter p {
+        .newsletter-form-container p {
             margin-bottom: 20px;
             font-size: 0.9rem;
+            color: #ccc;
         }
 
         .newsletter-form {
             display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .newsletter-form input {
-            flex: 1;
             padding: 12px 15px;
             border: none;
             font-family: 'Inter', sans-serif;
+            border-radius: 5px;
+            font-size: 16px;
         }
 
         .newsletter-form button {
             background-color: #b8860b;
             color: white;
             border: none;
-            padding: 0 20px;
+            padding: 12px;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #9c7009;
+        }
+
+        .privacy-note {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        /* Social Media Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: #b8860b;
+            transform: translateY(-3px);
         }
 
         /* Contact Information Styles */
@@ -455,40 +562,30 @@
             color: #999;
         }
 
-        /* Hosting Instructions */
-        .hosting-instructions {
-            padding: 40px 0;
-            background-color: #f0f0f0;
-            border-top: 1px solid #ddd;
+        /* Help Section */
+        .help-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
         }
 
-        .hosting-instructions h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #1a1a1a;
+        .help-section h5 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+        .help-links a {
+            display: block;
+            color: #b8860b;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.3s;
         }
 
-        .step {
-            background-color: white;
-            padding: 25px;
-            border-left: 4px solid #4285f4;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .step h3 {
-            color: #4285f4;
-            margin-bottom: 10px;
-        }
-
-        .step p {
-            font-size: 0.95rem;
-            color: #555;
+        .help-links a:hover {
+            color: #ffd700;
+            text-decoration: underline;
         }
 
         /* Responsive Design */
@@ -499,14 +596,26 @@
             
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000;
+                flex-direction: column;
+                padding: 20px;
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
             }
             
             .mobile-menu-btn {
                 display: block;
-            }
-            
-            .header-icons {
-                margin-left: auto;
             }
         }
 
@@ -523,19 +632,28 @@
                 grid-template-columns: 1fr;
             }
             
-            .newsletter-form {
-                flex-direction: column;
-            }
-            
             .newsletter-form input, .newsletter-form button {
                 width: 100%;
-                margin-bottom: 10px;
             }
             
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
+            
+            .header-icons {
+                margin-left: auto;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Cart Icon Animation */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -548,27 +666,27 @@
     <!-- Header & Navigation -->
     <header>
         <div class="container header-main">
-            <a href="#" class="logo">BLUE<span>MOON</span></a>
+            <a href="index.html" class="logo">BLUE<span>MOON</span></a>
             
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
             
             <ul class="nav-links">
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">Designers</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Men</a></li>
-                <li><a href="#">Beauty</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">Sale</a></li>
-                <li><a href="#contact-info">Contact</a></li> <!-- Updated Navigation -->
+                <li><a href="new-arrivals.html">New Arrivals</a></li>
+                <li><a href="designers.html">Designers</a></li>
+                <li><a href="women.html">Women</a></li>
+                <li><a href="men.html">Men</a></li>
+                <li><a href="beauty.html">Beauty</a></li>
+                <li><a href="accessories.html">Accessories</a></li>
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             
             <div class="header-icons">
-                <a href="#"><i class="fas fa-search"></i></a>
-                <a href="#"><i class="fas fa-user"></i></a>
-                <a href="#"><i class="fas fa-shopping-bag"></i></a>
+                <a href="#" onclick="showSearch()"><i class="fas fa-search"></i></a>
+                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="#" onclick="showCart()"><i class="fas fa-shopping-bag"></i></a>
             </div>
         </div>
     </header>
@@ -576,7 +694,7 @@
     <!-- Promo Banner -->
     <section class="promo-banner">
         <div class="container">
-            <p><span class="highlight">FRIENDS & FAMILY:</span> 3 ways to save on top brands that make the best gifts! Ends tomorrow! <a href="#" style="color:#ffd700; text-decoration:underline;">Shop Now</a></p>
+            <p><span class="highlight">FRIENDS & FAMILY:</span> 3 ways to save on top brands that make the best gifts! <span id="promo-date">Ends December 12!</span> <a href="sale.html" style="color:#ffd700; text-decoration:underline;">Shop Now</a></p>
         </div>
     </section>
 
@@ -584,8 +702,8 @@
     <section class="hero">
         <div class="container">
             <h1>Luxury Meets Style</h1>
-            <p>Discover exclusive collections crafted with Blue Moon’s signature elegance. Luxury fashion—redefined, refined, and made for everyone.</p>
-            <a href="#" class="btn">SHOP THE COLLECTION</a>
+            <p>Discover exclusive collections crafted with Blue Moon's signature elegance. Luxury fashion—redefined, refined, and made for everyone.</p>
+            <a href="#products" class="btn">SHOP THE COLLECTION</a>
         </div>
     </section>
 
@@ -598,19 +716,19 @@
                     <div class="badge">ENDS TOMORROW</div>
                     <h3>30% OFF</h3>
                     <p>Regular & already-reduced prices</p>
-                    <a href="#" class="btn">SHOP NOW</a>
+                    <a href="sale.html" class="btn">SHOP NOW</a>
                 </div>
                 <div class="offer-card">
                     <div class="badge">BEAUTY & FRAGRANCE</div>
                     <h3>15% OFF</h3>
                     <p>Your holiday glam. Shop makeup, skin care, hair care, perfume & cologne.</p>
-                    <a href="#" class="btn">SHOP BEAUTY</a>
+                    <a href="beauty.html" class="btn">SHOP BEAUTY</a>
                 </div>
                 <div class="offer-card">
                     <div class="badge">STAR MONEY</div>
                     <h3>$20 IN STAR MONEY</h3>
                     <p>Per every $100 spent* on eligible brands</p>
-                    <a href="#" class="btn">LEARN MORE</a>
+                    <a href="#" class="btn" onclick="showStarMoneyInfo()">LEARN MORE</a>
                 </div>
             </div>
         </div>
@@ -621,83 +739,82 @@
         <div class="container">
             <h2 class="section-title">Shop By Category</h2>
             <div class="category-grid">
-                <div class="category-item">
-                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mini Bags">
+                <a href="new-arrivals.html" class="category-item">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="New Arrivals">
                     <div class="category-overlay">
-                        <h3>Mini Bags</h3>
-                        <p>From Gucci & More</p>
+                        <h3>New Arrivals</h3>
+                        <p>Latest Luxury Collections</p>
                     </div>
-                </div>
-                <div class="category-item">
-                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Women's Shoes">
+                </a>
+                <a href="women.html" class="category-item">
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Women's Collection">
                     <div class="category-overlay">
-                        <h3>Women's Shoes</h3>
-                        <p>Designer Collections</p>
+                        <h3>Women's Collection</h3>
+                        <p>Designer Bags & Shoes</p>
                     </div>
-                </div>
-                <div class="category-item">
-                    <img src="https://images.unsplash.com/photo-1592878940526-0211fdd21c2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Men's Leather Goods">
+                </a>
+                <a href="men.html" class="category-item">
+                    <img src="https://images.unsplash.com/photo-1592878940526-0211fdd21c2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Men's Collection">
                     <div class="category-overlay">
-                        <h3>Men's Small Leathergoods</h3>
+                        <h3>Men's Collection</h3>
                         <p>Premium Accessories</p>
                     </div>
-                </div>
-                <div class="category-item">
-                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Silk & Scarves">
+                </a>
+                <a href="beauty.html" class="category-item">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beauty & Fragrance">
                     <div class="category-overlay">
-                        <h3>Men's Silk & Scarves</h3>
-                        <p>Luxury Fabrics</p>
+                        <h3>Beauty & Fragrance</h3>
+                        <p>Luxury Cosmetics</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section class="products">
+    <section class="products" id="products">
         <div class="container">
             <h2 class="section-title">Featured Products</h2>
             <div class="product-grid">
-                <div class="product-card">
+                <a href="product-details.html?product=1" class="product-card">
                     <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gucci Mini Bag">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="GG Marmont Mini Bag">
                     </div>
                     <div class="product-info">
                         <h4>GG Marmont Mini Bag</h4>
                         <div class="product-price">$980 <span class="original-price">$1,200</span></div>
-                        <a href="#" class="btn">ADD TO BAG</a>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="product-details.html?product=2" class="product-card">
                     <div class="product-img">
                         <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Designer Sneakers">
                     </div>
                     <div class="product-info">
                         <h4>Designer Platform Sneakers</h4>
                         <div class="product-price">$650</div>
-                        <a href="#" class="btn">ADD TO BAG</a>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="product-details.html?product=3" class="product-card">
                     <div class="product-img">
                         <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Men's Wallet">
                     </div>
                     <div class="product-info">
                         <h4>Men's Leather Bifold Wallet</h4>
                         <div class="product-price">$320 <span class="original-price">$400</span></div>
-                        <a href="#" class="btn">ADD TO BAG</a>
                     </div>
-                </div>
-                <div class="product-card">
+                </a>
+                <a href="product-details.html?product=4" class="product-card">
                     <div class="product-img">
                         <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Silk Scarf">
                     </div>
                     <div class="product-info">
                         <h4>Floral Silk Scarf</h4>
                         <div class="product-price">$280</div>
-                        <a href="#" class="btn">ADD TO BAG</a>
                     </div>
-                </div>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="shop-all.html" class="btn">VIEW ALL PRODUCTS</a>
             </div>
         </div>
     </section>
@@ -706,342 +823,565 @@
     <footer id="contact-info">
         <div class="container">
             <div class="footer-grid">
+                <!-- Newsletter Column -->
                 <div class="footer-column">
-                    <h4>BLUE MOON</h4>
-                    <p>Combining luxury fashion with accessible pricing. Premium brands for discerning customers.</p>
-                    <div style="margin-top: 15px;">
-                        <a href="#" style="color: #ccc; margin-right: 15px; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: #ccc; margin-right: 15px; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="color: #ccc; margin-right: 15px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: #ccc; font-size: 1.2rem;"><i class="fab fa-pinterest"></i></a>
+                    <div class="newsletter-form-container">
+                        <h4>SUBSCRIBE TO OUR NEWSLETTER</h4>
+                        <p>Get exclusive offers, new arrivals, and style inspiration delivered to your inbox.</p>
+                        <form class="newsletter-form" id="newsletterForm">
+                            <input type="email" id="newsletterEmail" placeholder="Insert your e-mail address *" required>
+                            <span id="emailError" style="color: #ff6b6b; font-size: 0.8rem; display: none;">The E-mail field is required</span>
+                            <button type="submit" class="btn">SUBSCRIBE</button>
+                        </form>
+                        <p class="privacy-note">
+                            By clicking on "Subscribe", you confirm that you have read and understood our Privacy Statement and that you want to receive the newsletter and other marketing communication as set out therein.
+                        </p>
+                        
+                        <div class="social-links">
+                            <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="https://spotify.com" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
+                            <a href="https://discord.com" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+                            <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Shop Column -->
                 <div class="footer-column">
                     <h4>SHOP</h4>
                     <ul>
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Kids</a></li>
-                        <li><a href="#">Beauty</a></li>
-                        <li><a href="#">Accessories</a></li>
-                        <li><a href="#">Sale</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                        <li><a href="women.html">Women's Collection</a></li>
+                        <li><a href="men.html">Men's Collection</a></li>
+                        <li><a href="beauty.html">Beauty & Fragrance</a></li>
+                        <li><a href="accessories.html">Accessories</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                        <li><a href="designers.html">Designers</a></li>
                     </ul>
                 </div>
+
+                <!-- Help Column -->
                 <div class="footer-column">
-                    <h4>HELP</h4>
-                    <ul>
-                        <li><a href="#">Customer Service</a></li>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Shipping Information</a></li>
-                        <li><a href="#">Returns & Exchanges</a></li>
-                        <li><a href="#contact-info">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column newsletter">
-                    <h4>NEWSLETTER</h4>
-                    <p>Subscribe to get exclusive offers, new arrivals, and style inspiration.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit" class="btn">SUBSCRIBE</button>
-                    </form>
-                </div>
-                
-                <!-- NEW CONTACT INFORMATION SECTION -->
-                <div class="footer-column contact-info">
-                    <h4>CONTACT INFORMATION</h4>
-                    <div class="contact-details">
+                    <h4>DO YOU NEED HELP?</h4>
+                    <div class="help-section">
                         <div class="contact-item">
-                            <i class="fas fa-headset"></i>
+                            <i class="fas fa-phone"></i>
                             <div>
-                                <p><strong>Customer Service</strong></p>
-                                <a href="mailto:customerservice@bluemoon.us.com">customerservice@bluemoon.us.com</a>
-                                <p class="phone-hours"><a href="tel:+18005552583">+1 (800) 555-BLUE</a></p>
+                                <p><strong>Call us</strong></p>
+                                <a href="tel:+18779977232">1-877-997-7232</a>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-shopping-bag"></i>
+                            <i class="fab fa-whatsapp"></i>
                             <div>
-                                <p><strong>Order Support</strong></p>
-                                <a href="mailto:orders@bluemoon.us.com">orders@bluemoon.us.com</a>
-                                <p class="phone-hours"><a href="tel:+18885556666">+1 (888) 555-MOON</a></p>
+                                <p><strong>Write us on WhatsApp</strong></p>
+                                <a href="https://wa.me/18779977232">+1 (877) 997-7232</a>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-exchange-alt"></i>
+                            <i class="fas fa-comments"></i>
                             <div>
-                                <p><strong>Returns & Exchanges</strong></p>
-                                <a href="mailto:returns@bluemoon.us.com">returns@bluemoon.us.com</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-briefcase"></i>
-                            <div>
-                                <p><strong>Business Inquiries</strong></p>
-                                <a href="mailto:wholesale@bluemoon.us.com">wholesale@bluemoon.us.com</a>
-                                <a href="mailto:partners@bluemoon.us.com">partners@bluemoon.us.com</a>
-                                <p class="phone-hours"><a href="tel:+12485550123">+1 (248) 555-0123</a> (International)</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <p><strong>Other Departments</strong></p>
-                                <a href="mailto:careers@bluemoon.us.com">careers@bluemoon.us.com</a>
-                                <a href="mailto:press@bluemoon.us.com">press@bluemoon.us.com</a>
-                                <a href="mailto:ceo@bluemoon.us.com">ceo@bluemoon.us.com</a>
-                                <a href="mailto:manager@bluemoon.us.com">manager@bluemoon.us.com</a>
+                                <p><strong>Chat with our Client Service</strong></p>
+                                <a href="contact.html">Start Chat</a>
                             </div>
                         </div>
                     </div>
-                    <div class="phone-hours" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #333;">
-                        <p><strong>Business Hours:</strong> Monday to Friday, 9 AM to 6 PM EST</p>
-                        <p><em>Thank you for calling Blue Moon Luxury Fashion. Please leave a message and we'll return your call within 24 hours.</em></p>
+                    
+                    <div class="help-links" style="margin-top: 20px;">
+                        <a href="faq.html">FAQ</a>
+                        <a href="sitemap.html">Sitemap</a>
+                        <a href="track-order.html">Track your order</a>
+                        <a href="returns.html">Returns</a>
+                    </div>
+                </div>
+
+                <!-- Company & Legal Column -->
+                <div class="footer-column">
+                    <h4>COMPANY</h4>
+                    <ul>
+                        <li><a href="about.html">About Blue Moon</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="careers.html">Work with us</a></li>
+                        <li><a href="stores.html">Store Locator</a></li>
+                    </ul>
+                    
+                    <div style="margin-top: 20px;">
+                        <h5>LEGAL TERMS</h5>
+                        <div class="help-links">
+                            <a href="legal-notice.html">Legal Notice</a>
+                            <a href="privacy.html">Privacy Statement</a>
+                            <a href="cookie-policy.html">Cookie Policy</a>
+                            <a href="#" onclick="showCookieSettings()">Cookie settings</a>
+                            <a href="terms.html">Terms of sale</a>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p>&copy; 2023 Blue Moon Luxury Fashion. All rights reserved. | www.bluemoon.us.com</p>
-                <p style="margin-top: 10px;">Premium online shopping experience by Blue Moon Fashion.</p>
+                <p style="margin-bottom: 10px;">
+                    Shipping to: <select style="background: transparent; color: #ccc; border: 1px solid #666; padding: 5px; border-radius: 3px;">
+                        <option>United States/English</option>
+                        <option>Canada/English</option>
+                        <option>United Kingdom/English</option>
+                        <option>France/Français</option>
+                    </select>
+                </p>
+                <p>&copy; BLUE MOON 2007 - 2025 | Luxury Fashion E-commerce</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; color: #777;">
+                    Blue Moon Luxury Fashion is a premium online retailer offering designer collections and exclusive fashion items.
+                </p>
             </div>
         </div>
     </footer>
 
+    <!-- Shopping Cart Icon -->
+    <div id="cartIcon" style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; display: none;">
+        <button onclick="showCart()" style="background: #b8860b; color: white; border: none; padding: 12px 15px; border-radius: 50%; font-size: 18px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.3); position: relative;">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cartCount" style="position: absolute; top: -5px; right: -5px; background: red; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;">0</span>
+        </button>
+    </div>
+
+    <!-- Admin Panel Gear -->
+    <div id="adminAccess" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+        <button onclick="showAdminPrompt()" style="background: #000; color: #b8860b; border: none; padding: 10px 15px; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+            ⚙️
+        </button>
+    </div>
+
     <script>
-        // Mobile menu toggle
+        // ==============================
+        // E-COMMERCE SYSTEM
+        // ==============================
+
+        // ADMIN SETTINGS
+        let adminSettings = {
+            password: "B@ngladesh2026$",
+            username: "admin"
+        };
+
+        // SHOPPING CART
+        let shoppingCart = [];
+
+        // Load saved data
+        function loadSavedData() {
+            const savedSettings = localStorage.getItem('blueMoonAdminSettings');
+            if (savedSettings) {
+                adminSettings = JSON.parse(savedSettings);
+            }
+            
+            const savedCart = localStorage.getItem('blueMoonShoppingCart');
+            if (savedCart) {
+                shoppingCart = JSON.parse(savedCart);
+                updateCartCount();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('blueMoonShoppingCart', JSON.stringify(shoppingCart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const totalItems = shoppingCart.reduce((total, item) => total + item.quantity, 0);
+            const cartCount = document.getElementById('cartCount');
+            const cartIcon = document.getElementById('cartIcon');
+            
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+            }
+            if (cartIcon) {
+                cartIcon.style.display = totalItems > 0 ? 'block' : 'none';
+            }
+        }
+
+        // Initialize
+        loadSavedData();
+
+        // ==============================
+        // NAVIGATION & MOBILE MENU
+        // ==============================
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
             
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.backgroundColor = '#000';
-                navLinks.style.padding = '20px';
-                navLinks.style.zIndex = '1000';
-                
-                const links = navLinks.querySelectorAll('li');
-                links.forEach(link => {
-                    link.style.margin = '10px 0';
-                });
+            if (!navLinks.contains(event.target) && !mobileBtn.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
             }
         });
-        
-        // Newsletter form submission
-        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                            // Close mobile menu if open
+                            document.querySelector('.nav-links').classList.remove('active');
+                        }
+                    }
+                }
+            });
+        });
+
+        // ==============================
+        // NEWSLETTER FORM
+        // ==============================
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = this.querySelector('input').value;
-            alert(`Thank you for subscribing with ${email}! You'll receive our newsletter soon.`);
+            
+            const email = document.getElementById('newsletterEmail').value;
+            const errorElement = document.getElementById('emailError');
+            
+            if (!email) {
+                errorElement.style.display = 'block';
+                return;
+            }
+            
+            errorElement.style.display = 'none';
+            
+            // Save subscription
+            const subscriptions = JSON.parse(localStorage.getItem('blueMoonNewsletter') || '[]');
+            subscriptions.push({
+                email: email,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('blueMoonNewsletter', JSON.stringify(subscriptions));
+            
+            // Show success message
+            alert('Thank you for subscribing to our newsletter! You will receive exclusive offers and updates.');
+            
+            // Reset form
             this.reset();
         });
-        
-        // Add to cart functionality
-        document.querySelectorAll('.product-card .btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productName = this.closest('.product-info').querySelector('h4').textContent;
-                alert(`Added "${productName}" to your shopping bag!`);
-            });
-        });
-        
-        // Update promo banner date
-        const promoText = document.querySelector('.promo-banner p');
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const formattedDate = tomorrow.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-        promoText.innerHTML = promoText.innerHTML.replace('Ends tomorrow!', `Ends ${formattedDate}!`);
-        
-        // Smooth scroll to contact section
-        document.querySelectorAll('a[href="#contact-info"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('contact-info').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-    <!-- ==================== -->
-<!-- ADMIN PANEL - Add this RIGHT HERE -->
-<!-- ==================== -->
-<div id="adminAccess" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
-    <button onclick="showAdminPrompt()" style="background: #000; color: #b8860b; border: none; padding: 10px 15px; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-        ⚙️
-    </button>
-</div>
 
-<script>
-// ADMIN PANEL FUNCTIONS
-function showAdminPrompt() {
-    const password = prompt("Enter admin password:");
-    if (password === "admin123") {
-        showAdminPanel();
-    } else if (password) {
-        alert("Incorrect password. Try: admin123");
-    }
-}
-
-function showAdminPanel() {
-    const panel = document.createElement('div');
-    panel.innerHTML = `
-        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10001; display: flex; justify-content: center; align-items: center;">
-            <div style="background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto;">
-                <h2 style="color: #000;">Blue Moon Admin Panel</h2>
-                <p style="color: #666; margin-bottom: 20px;">Add and manage products</p>
+        // ==============================
+        // PRODUCT FUNCTIONS
+        // ==============================
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Prevent clicking if clicking on a link within the card
+                if (e.target.tagName === 'A' || e.target.closest('a')) {
+                    return;
+                }
                 
-                <div style="margin: 20px 0;">
-                    <input type="text" id="newProductName" placeholder="Product Name" style="width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px;">
-                    <input type="number" id="newProductPrice" placeholder="Price ($)" style="width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px;">
-                    <input type="text" id="newProductImage" placeholder="Image URL (from Unsplash)" style="width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px;">
-                    <textarea id="newProductDesc" placeholder="Product Description" style="width: 100%; padding: 12px; margin: 8px 0; height: 100px; border: 1px solid #ddd; border-radius: 5px; font-family: 'Inter', sans-serif;"></textarea>
-                    
-                    <div style="display: flex; gap: 10px; margin-top: 15px;">
-                        <button onclick="addNewProduct()" style="background: #b8860b; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; flex: 1;">
-                            Add Product
-                        </button>
-                        <button onclick="panel.remove()" style="background: #666; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer;">
-                            Close
+                // Get product info
+                const productName = this.querySelector('h4').textContent;
+                const productPrice = this.querySelector('.product-price').textContent.replace('$', '').replace(/[^\d.]/g, '');
+                
+                // For now, just add to cart
+                // In real implementation, this would go to product details page
+                addToCart(productName, parseFloat(productPrice));
+            });
+        });
+
+        function addToCart(productName, productPrice) {
+            // Check if product already in cart
+            const existingItem = shoppingCart.find(item => item.name === productName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                shoppingCart.push({
+                    id: Date.now(),
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1,
+                    date: new Date().toISOString()
+                });
+            }
+            
+            saveCart();
+            
+            // Show cart icon animation
+            const cartIcon = document.getElementById('cartIcon');
+            if (cartIcon) {
+                cartIcon.style.animation = 'none';
+                setTimeout(() => {
+                    cartIcon.style.animation = 'bounce 0.5s';
+                }, 10);
+            }
+            
+            // Show success message
+            showNotification(`✅ Added "${productName}" to your cart!`);
+        }
+
+        function showCart() {
+            if (shoppingCart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Calculate totals
+            const subtotal = shoppingCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 100 ? 0 : 15;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+            
+            // Create cart modal
+            const cartModal = document.createElement('div');
+            cartModal.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10002; display: flex; justify-content: center; align-items: center; padding: 20px;">
+                    <div style="background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                        <h2 style="color: #000; margin-bottom: 20px;">🛍️ Your Shopping Cart</h2>
+                        
+                        <div id="cartItems" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
+                            ${shoppingCart.map((item, index) => `
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; margin-bottom: 10px; background: #f9f9f9; border-radius: 8px;">
+                                    <div>
+                                        <strong>${item.name}</strong><br>
+                                        <span style="color: #b8860b; font-weight: bold;">$${item.price.toFixed(2)} each</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <button onclick="updateQuantity(${index}, -1)" style="background: #666; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">-</button>
+                                        <span style="font-weight: bold; min-width: 30px; text-align: center;">${item.quantity}</span>
+                                        <button onclick="updateQuantity(${index}, 1)" style="background: #b8860b; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">+</button>
+                                        <span style="font-weight: bold; color: #000; margin-left: 15px;">$${(item.price * item.quantity).toFixed(2)}</span>
+                                        <button onclick="removeFromCart(${index})" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-left: 10px;">Remove</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="border-top: 2px solid #eee; padding-top: 20px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Subtotal:</span>
+                                <span>$${subtotal.toFixed(2)}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Shipping:</span>
+                                <span>${shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Tax (8%):</span>
+                                <span>$${tax.toFixed(2)}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2em; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">
+                                <span>Total:</span>
+                                <span style="color: #b8860b;">$${total.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; margin-top: 25px;">
+                            <button onclick="proceedToCheckout()" style="background: #b8860b; color: white; border: none; padding: 15px 25px; border-radius: 5px; cursor: pointer; flex: 2; font-size: 16px; font-weight: bold;">
+                                🛒 Proceed to Checkout
+                            </button>
+                            <button onclick="cartModal.remove()" style="background: #666; color: white; border: none; padding: 15px 25px; border-radius: 5px; cursor: pointer; flex: 1;">
+                                Continue Shopping
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(cartModal);
+        }
+
+        function updateQuantity(index, change) {
+            shoppingCart[index].quantity += change;
+            
+            if (shoppingCart[index].quantity <= 0) {
+                shoppingCart.splice(index, 1);
+            }
+            
+            saveCart();
+            
+            // Refresh cart display
+            document.querySelectorAll('div').forEach(el => {
+                if (el.innerHTML.includes('Your Shopping Cart')) {
+                    el.remove();
+                }
+            });
+            
+            if (shoppingCart.length > 0) {
+                showCart();
+            } else {
+                showNotification('Cart is now empty!');
+            }
+        }
+
+        function removeFromCart(index) {
+            if (confirm('Remove this item from cart?')) {
+                shoppingCart.splice(index, 1);
+                saveCart();
+                
+                // Refresh cart display
+                document.querySelectorAll('div').forEach(el => {
+                    if (el.innerHTML.includes('Your Shopping Cart')) {
+                        el.remove();
+                    }
+                });
+                
+                if (shoppingCart.length > 0) {
+                    showCart();
+                } else {
+                    showNotification('Item removed from cart!');
+                }
+            }
+        }
+
+        function proceedToCheckout() {
+            alert('Checkout functionality would be implemented here with payment gateway integration.');
+            // In real implementation, this would redirect to checkout page
+        }
+
+        // ==============================
+        // ADMIN PANEL
+        // ==============================
+        function showAdminPrompt() {
+            const password = prompt("Enter admin password:");
+            if (password === adminSettings.password) {
+                showAdminPanel();
+            } else if (password) {
+                alert("Incorrect password.");
+            }
+        }
+
+        function showAdminPanel() {
+            const panel = document.createElement('div');
+            panel.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10001; display: flex; justify-content: center; align-items: center;">
+                    <div style="background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                        <h2 style="color: #000; margin: 0 0 20px 0;">Blue Moon Admin Panel</h2>
+                        <p style="color: #666; margin-bottom: 20px;">Manage your store, products, and settings</p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                            <button onclick="window.location.href='admin-products.html'" style="background: #b8860b; color: white; border: none; padding: 15px; border-radius: 5px; cursor: pointer; text-align: center;">
+                                <i class="fas fa-box" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                                Manage Products
+                            </button>
+                            <button onclick="window.location.href='admin-orders.html'" style="background: #666; color: white; border: none; padding: 15px; border-radius: 5px; cursor: pointer; text-align: center;">
+                                <i class="fas fa-shopping-cart" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                                View Orders
+                            </button>
+                        </div>
+                        
+                        <div style="margin: 20px 0;">
+                            <h3 style="color: #333; margin-bottom: 15px;">Quick Actions</h3>
+                            <button onclick="addQuickProduct()" style="background: #b8860b; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px; margin-bottom: 10px;">
+                                <i class="fas fa-plus"></i> Add Product
+                            </button>
+                            <button onclick="viewAnalytics()" style="background: #666; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 10px;">
+                                <i class="fas fa-chart-line"></i> View Analytics
+                            </button>
+                        </div>
+                        
+                        <button onclick="panel.remove()" style="background: #333; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px;">
+                            Close Admin Panel
                         </button>
                     </div>
                 </div>
-                
-                <div id="existingProducts" style="margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px;">
-                    <h3>Your Products (${getProductCount()})</h3>
-                    <div id="productsList" style="margin-top: 10px;"></div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(panel);
-    loadExistingProducts();
-}
+            `;
+            
+            document.body.appendChild(panel);
+        }
 
-function getProductCount() {
-    const products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
-    return products.length;
-}
+        function addQuickProduct() {
+            alert('Quick product add feature would open here.');
+        }
 
-function addNewProduct() {
-    const name = document.getElementById('newProductName').value;
-    const price = document.getElementById('newProductPrice').value;
-    const image = document.getElementById('newProductImage').value;
-    const desc = document.getElementById('newProductDesc').value;
-    
-    if (!name || !price || !image) {
-        alert('Please fill in Product Name, Price, and Image URL');
-        return;
-    }
-    
-    const product = {
-        id: Date.now(),
-        name: name,
-        price: price,
-        image: image,
-        description: desc,
-        date: new Date().toISOString()
-    };
-    
-    // Save to localStorage
-    let products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
-    products.push(product);
-    localStorage.setItem('blueMoonProducts', JSON.stringify(products));
-    
-    // Add to website display
-    addProductToWebsite(product);
-    
-    alert('✅ Product added successfully!');
-    
-    // Clear form
-    document.getElementById('newProductName').value = '';
-    document.getElementById('newProductPrice').value = '';
-    document.getElementById('newProductImage').value = '';
-    document.getElementById('newProductDesc').value = '';
-    
-    // Update product list
-    loadExistingProducts();
-}
+        function viewAnalytics() {
+            alert('Analytics dashboard would open here.');
+        }
 
-function addProductToWebsite(product) {
-    const productGrid = document.querySelector('.product-grid');
-    
-    if (!productGrid) return;
-    
-    const productHTML = `
-        <div class="product-card">
-            <div class="product-img">
-                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="product-info">
-                <h4>${product.name}</h4>
-                <div class="product-price">$${product.price}</div>
-                <p style="color: #666; font-size: 0.9rem; margin-bottom: 10px;">${product.description}</p>
-                <a href="#" class="btn" onclick="addToCart('${product.name}', ${product.price})">ADD TO BAG</a>
-            </div>
-        </div>
-    `;
-    
-    // Add to beginning of grid
-    productGrid.innerHTML = productHTML + productGrid.innerHTML;
-}
+        // ==============================
+        // HELPER FUNCTIONS
+        // ==============================
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                z-index: 10003;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
 
-function loadExistingProducts() {
-    const products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
-    const list = document.getElementById('productsList');
-    
-    if (products.length === 0) {
-        list.innerHTML = '<p style="color: #666; text-align: center;">No products added yet.</p>';
-        return;
-    }
-    
-    list.innerHTML = products.map(p => `
-        <div style="background: #f9f9f9; padding: 12px; margin: 8px 0; border-radius: 5px; border-left: 4px solid #b8860b;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <strong style="color: #000;">${p.name}</strong><br>
-                    <span style="color: #b8860b; font-weight: bold;">$${p.price}</span> • 
-                    <span style="color: #666; font-size: 0.9rem;">${new Date(p.date).toLocaleDateString()}</span>
-                </div>
-                <button onclick="deleteProduct(${p.id})" style="background: #ff4444; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; font-size: 12px;">
-                    Delete
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
+        function showStarMoneyInfo() {
+            alert('Star Money Program:\n\nEarn $20 in Star Money for every $100 spent on eligible items.\nStar Money can be used on future purchases.\nValid through December 31, 2025.\nExclusions apply to clearance and select designer items.');
+        }
 
-function deleteProduct(id) {
-    if (confirm('Delete this product from your store?')) {
-        // Remove from localStorage
-        let products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
-        products = products.filter(p => p.id !== id);
-        localStorage.setItem('blueMoonProducts', JSON.stringify(products));
-        
-        // Reload list
-        loadExistingProducts();
-        
-        // Note: To remove from website display, you'd need to refresh the page
-        alert('Product deleted. Refresh page to update website display.');
-    }
-}
+        function showCookieSettings() {
+            alert('Cookie settings would open here. Users can manage their cookie preferences.');
+        }
 
-function addToCart(productName, price) {
-    alert(`Added "${productName}" ($${price}) to cart!`);
-}
+        function showSearch() {
+            const searchTerm = prompt('Enter search term:');
+            if (searchTerm) {
+                alert(`Searching for: ${searchTerm}\n\nIn a real implementation, this would show search results.`);
+            }
+        }
 
-// Load existing products when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Load admin-added products to website
-    const products = JSON.parse(localStorage.getItem('blueMoonProducts') || '[]');
-    products.forEach(product => {
-        addProductToWebsite(product);
-    });
-});
-</script>
-<!-- ==================== -->
-<!-- END OF ADMIN PANEL -->
-<!-- ==================== -->
+        // Update promo date
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update promo date to always be tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const formattedDate = tomorrow.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+            const promoDateElement = document.getElementById('promo-date');
+            if (promoDateElement) {
+                promoDateElement.textContent = `Ends ${formattedDate}!`;
+            }
+            
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Make current page active in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
