@@ -3,107 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Blue Moon</title>
+    <title>Blue Moon Admin</title>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         
-        .admin-login {
+        .login-box {
             background: white;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 400px;
         }
         
-        .admin-login h2 {
+        h1 {
             text-align: center;
             color: #333;
             margin-bottom: 30px;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        .login-btn {
+        input {
             width: 100%;
             padding: 12px;
-            background: #b8860b;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #000;
             color: white;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
             cursor: pointer;
-            transition: background 0.3s;
+            font-size: 16px;
+            margin-top: 10px;
         }
         
-        .login-btn:hover {
-            background: #9c7009;
+        button:hover {
+            background: #333;
         }
         
         .error {
             color: red;
-            margin-top: 10px;
             text-align: center;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="admin-login">
-        <h2>Blue Moon Admin Login</h2>
-        <form id="adminLoginForm">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" id="username" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="password" required>
-            </div>
-            <button type="submit" class="login-btn">Login</button>
-            <div id="errorMessage" class="error"></div>
-        </form>
+    <div class="login-box">
+        <h1>🔐 Blue Moon Admin</h1>
+        <input type="text" id="username" placeholder="Username" value="admin">
+        <input type="password" id="password" placeholder="Password" value="admin123">
+        <button onclick="login()">Login</button>
+        <div id="error" class="error"></div>
         <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">
-            Default credentials: admin / admin123
+            Default: admin / admin123
         </p>
     </div>
 
     <script>
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
+        function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
             
-            // Simple authentication (in real app, use backend authentication)
             if (username === 'admin' && password === 'admin123') {
-                localStorage.setItem('adminLoggedIn', 'true');
+                // Redirect to dashboard
                 window.location.href = 'admin-dashboard.html';
             } else {
-                errorMessage.textContent = 'Invalid username or password';
+                document.getElementById('error').textContent = 'Invalid credentials. Use admin / admin123';
+            }
+        }
+        
+        // Press Enter to login
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
             }
         });
     </script>
