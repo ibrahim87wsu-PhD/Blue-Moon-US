@@ -399,6 +399,54 @@
             cursor: pointer;
         }
 
+        /* Contact Information Styles */
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            color: #b8860b;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .contact-item div p {
+            margin: 0 0 5px 0;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .contact-item a {
+            color: #b8860b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+
+        .phone-hours {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
@@ -483,6 +531,11 @@
                 width: 100%;
                 margin-bottom: 10px;
             }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
     </style>
 </head>
@@ -509,6 +562,7 @@
                 <li><a href="#">Beauty</a></li>
                 <li><a href="#">Accessories</a></li>
                 <li><a href="#">Sale</a></li>
+                <li><a href="#contact-info">Contact</a></li> <!-- Updated Navigation -->
             </ul>
             
             <div class="header-icons">
@@ -682,7 +736,7 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact-info">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
@@ -713,7 +767,7 @@
                         <li><a href="#">My Account</a></li>
                         <li><a href="#">Shipping Information</a></li>
                         <li><a href="#">Returns & Exchanges</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#contact-info">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-column newsletter">
@@ -723,6 +777,59 @@
                         <input type="email" placeholder="Enter your email" required>
                         <button type="submit" class="btn">SUBSCRIBE</button>
                     </form>
+                </div>
+                
+                <!-- NEW CONTACT INFORMATION SECTION -->
+                <div class="footer-column contact-info">
+                    <h4>CONTACT INFORMATION</h4>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-headset"></i>
+                            <div>
+                                <p><strong>Customer Service</strong></p>
+                                <a href="mailto:customerservice@bluemoon.us.com">customerservice@bluemoon.us.com</a>
+                                <p class="phone-hours"><a href="tel:+18005552583">+1 (800) 555-BLUE</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-shopping-bag"></i>
+                            <div>
+                                <p><strong>Order Support</strong></p>
+                                <a href="mailto:orders@bluemoon.us.com">orders@bluemoon.us.com</a>
+                                <p class="phone-hours"><a href="tel:+18885556666">+1 (888) 555-MOON</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-exchange-alt"></i>
+                            <div>
+                                <p><strong>Returns & Exchanges</strong></p>
+                                <a href="mailto:returns@bluemoon.us.com">returns@bluemoon.us.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <p><strong>Business Inquiries</strong></p>
+                                <a href="mailto:wholesale@bluemoon.us.com">wholesale@bluemoon.us.com</a>
+                                <a href="mailto:partners@bluemoon.us.com">partners@bluemoon.us.com</a>
+                                <p class="phone-hours"><a href="tel:+12125550123">+1 (212) 555-0123</a> (International)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <p><strong>Other Departments</strong></p>
+                                <a href="mailto:careers@bluemoon.us.com">careers@bluemoon.us.com</a>
+                                <a href="mailto:press@bluemoon.us.com">press@bluemoon.us.com</a>
+                                <a href="mailto:ceo@bluemoon.us.com">ceo@bluemoon.us.com</a>
+                                <a href="mailto:manager@bluemoon.us.com">manager@bluemoon.us.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="phone-hours" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #333;">
+                        <p><strong>Business Hours:</strong> Monday to Friday, 9 AM to 6 PM EST</p>
+                        <p><em>Thank you for calling Blue Moon Luxury Fashion. Please leave a message and we'll return your call within 24 hours.</em></p>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -778,6 +885,16 @@
         tomorrow.setDate(tomorrow.getDate() + 1);
         const formattedDate = tomorrow.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
         promoText.innerHTML = promoText.innerHTML.replace('Ends tomorrow!', `Ends ${formattedDate}!`);
+        
+        // Smooth scroll to contact section
+        document.querySelectorAll('a[href="#contact-info"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('contact-info').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>
