@@ -103,39 +103,20 @@
 
         .back-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .back-link a {
             color: #666;
             text-decoration: none;
             font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .back-link a:hover {
             text-decoration: underline;
-        }
-
-        .admin-credentials {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 25px;
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .admin-credentials h4 {
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-
-        .admin-credentials code {
-            background: #e9ecef;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
         }
 
         @media (max-width: 480px) {
@@ -172,15 +153,8 @@
             </button>
         </form>
 
-        <div class="admin-credentials">
-            <h4>Default Credentials:</h4>
-            <p><strong>Username:</strong> <code>admin</code></p>
-            <p><strong>Password:</strong> <code>B@ngladesh2026$</code></p>
-            <p style="margin-top: 10px; font-size: 0.8rem; color: #888;">
-                Change these in admin-dashboard.html after login
-            </p>
-        </div>
-
+        <!-- REMOVED: Public password display section -->
+        
         <div class="back-link">
             <a href="index.html">
                 <i class="fas fa-arrow-left"></i> Back to Store
@@ -196,9 +170,9 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
             
-            // Default credentials
+            // Admin credentials
             const adminUsername = 'admin';
-            const adminPassword = 'B@ngladesh2026$';
+            const adminPassword = 'B@ngladesh2026$';  // Password kept as requested
             
             // Check credentials
             if (username === adminUsername && password === adminPassword) {
@@ -210,7 +184,7 @@
                 window.location.href = 'admin-dashboard.html';
             } else {
                 errorMessage.style.display = 'block';
-                // Shake animation
+                // Shake animation for wrong credentials
                 this.style.animation = 'shake 0.5s';
                 setTimeout(() => this.style.animation = '', 500);
             }
