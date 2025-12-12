@@ -3,565 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Blue Moon US</title>
+    <title>Admin Login - Blue Moon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* (All the previous CSS styles remain exactly the same) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
+
         body {
-            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Inter', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
         }
-        /* ... (Keep all the existing CSS from the previous login page code) ... */
-        .password-rules {
-            font-size: 12px;
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            color: #000;
+            font-size: 2.5rem;
+        }
+
+        .logo span {
+            color: #b8860b;
+        }
+
+        .logo p {
             color: #666;
             margin-top: 5px;
-            padding-left: 10px;
+            font-size: 0.9rem;
         }
-        .password-rules ul {
-            list-style: none;
-            margin-top: 5px;
-        }
-        .password-rules li {
-            margin-bottom: 3px;
-        }
-        .password-rules li.valid {
-            color: #2ecc71;
-        }
-        .password-rules li.invalid {
-            color: #e74c3c;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .modal-header {
+
+        .form-group {
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
         }
-        .modal-header h3 {
-            color: #000;
-            font-size: 22px;
-        }
-        .modal-body {
-            margin-bottom: 25px;
-        }
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-        }
-        .modal-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .modal-btn.primary {
-            background: #000;
-            color: white;
-        }
-        .modal-btn.secondary {
-            background: #f5f5f5;
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             color: #333;
+            font-weight: 500;
         }
-        .modal-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #b8860b;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #b8860b;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #9c7009;
+        }
+
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .admin-credentials {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .admin-credentials h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .admin-credentials code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <!-- Left Side - Branding -->
-        <div class="brand-side">
-            <div class="logo">
-                <h1>Blue<span>Moon</span> US</h1>
+        <div class="logo">
+            <h1>BLUE<span>MOON</span></h1>
+            <p>Admin Login</p>
+        </div>
+
+        <form id="adminLoginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter admin username" required>
             </div>
-            
-            <p class="tagline">
-                Secure Admin Portal for managing your Blue Moon US platform. 
-                Access analytics, user data, and system controls.
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter admin password" required>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                Invalid username or password
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+
+        <div class="admin-credentials">
+            <h4>Default Credentials:</h4>
+            <p><strong>Username:</strong> <code>admin</code></p>
+            <p><strong>Password:</strong> <code>B@ngladesh2026$</code></p>
+            <p style="margin-top: 10px; font-size: 0.8rem; color: #888;">
+                Change these in admin-dashboard.html after login
             </p>
-            
-            <ul class="features">
-                <li><i class="fas fa-shield-alt"></i> Enterprise-grade security</li>
-                <li><i class="fas fa-chart-line"></i> Real-time analytics</li>
-                <li><i class="fas fa-user-cog"></i> User management</li>
-                <li><i class="fas fa-database"></i> Data insights</li>
-                <li><i class="fas fa-bell"></i> Notification system</li>
-            </ul>
-            
-            <div class="brand-footer">
-                © 2024 Blue Moon US Admin System. All rights reserved.
-            </div>
         </div>
 
-        <!-- Right Side - Login Form -->
-        <div class="login-side">
-            <div class="login-header">
-                <h2>Admin Login</h2>
-                <p>Enter your credentials to access the dashboard</p>
-            </div>
-
-            <!-- Error/Success Messages -->
-            <div id="errorAlert" class="alert error">
-                <i class="fas fa-exclamation-circle"></i>
-                <span id="errorText">Invalid credentials. Please try again.</span>
-            </div>
-
-            <div id="successAlert" class="alert success">
-                <i class="fas fa-check-circle"></i>
-                <span id="successText">Login successful! Redirecting...</span>
-            </div>
-
-            <form class="login-form" id="loginForm">
-                <div class="form-group">
-                    <label for="username">Username / Email</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="username" placeholder="Enter admin username or email" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Enter your password" required>
-                        <button type="button" class="password-toggle" id="togglePassword">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </div>
-                    <div class="password-rules" id="passwordRules">
-                        <strong>Password must:</strong>
-                        <ul>
-                            <li id="ruleLength" class="invalid">Be at least 8 characters long</li>
-                            <li id="ruleUppercase" class="invalid">Contain an uppercase letter</li>
-                            <li id="ruleLowercase" class="invalid">Contain a lowercase letter</li>
-                            <li id="ruleNumber" class="invalid">Contain a number</li>
-                            <li id="ruleSpecial" class="invalid">Contain a special character (!@#$%^&*)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="remember-forgot">
-                    <label class="remember-me">
-                        <input type="checkbox" id="rememberMe">
-                        <span>Remember me</span>
-                    </label>
-                    <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot Password?</a>
-                </div>
-
-                <button type="submit" class="login-btn">
-                    <i class="fas fa-sign-in-alt"></i> Sign In
-                </button>
-
-                <div class="divider">Or continue with</div>
-
-                <div class="social-login">
-                    <button type="button" class="social-btn google">
-                        <i class="fab fa-google"></i> Google
-                    </button>
-                    <button type="button" class="social-btn github">
-                        <i class="fab fa-github"></i> GitHub
-                    </button>
-                </div>
-
-                <div class="login-footer">
-                    <p>Need help? <a href="#">Contact System Administrator</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Change Password Modal -->
-    <div class="modal" id="changePasswordModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Change Default Password</h3>
-                <p style="color: #666; margin-top: 5px;">You must change the default password for security.</p>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="currentPassword">Current Password</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="currentPassword" placeholder="Enter current password (admin123)" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">New Password</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-key"></i>
-                        <input type="password" id="newPassword" placeholder="Enter new password" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm New Password</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-key"></i>
-                        <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
-                    </div>
-                </div>
-                <div class="password-rules" id="newPasswordRules">
-                    <strong>New password must:</strong>
-                    <ul>
-                        <li id="newRuleLength" class="invalid">Be at least 8 characters long</li>
-                        <li id="newRuleUppercase" class="invalid">Contain an uppercase letter</li>
-                        <li id="newRuleLowercase" class="invalid">Contain a lowercase letter</li>
-                        <li id="newRuleNumber" class="invalid">Contain a number</li>
-                        <li id="newRuleSpecial" class="invalid">Contain a special character (!@#$%^&*)</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="modal-btn secondary" id="cancelChangePassword">Cancel</button>
-                <button type="button" class="modal-btn primary" id="submitChangePassword">Change Password</button>
-            </div>
+        <div class="back-link">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i> Back to Store
+            </a>
         </div>
     </div>
 
     <script>
-        // ========== PASSWORD SECURITY CONFIG ==========
-        // !! IMPORTANT: In a real application, this would be handled on the SERVER !!
-        // This is a client-side simulation for demonstration.
-        const SECURITY_CONFIG = {
-            // The initial/default password (should be changed immediately)
-            DEFAULT_PASSWORD: 'admin123',
-            // Minimum password requirements
-            MIN_PASSWORD_LENGTH: 8,
-            REQUIRE_UPPERCASE: true,
-            REQUIRE_LOWERCASE: true,
-            REQUIRE_NUMBER: true,
-            REQUIRE_SPECIAL_CHAR: true,
-            SPECIAL_CHARS: '!@#$%^&*',
-            // New admin credentials (stored in localStorage for demo - NOT SECURE for production!)
-            // In production, this would be stored securely in a database on the server
-            STORAGE_KEY: 'blueMoonAdminCredentials'
-        };
-
-        // ========== DOM ELEMENTS ==========
-        const loginForm = document.getElementById('loginForm');
-        const errorAlert = document.getElementById('errorAlert');
-        const successAlert = document.getElementById('successAlert');
-        const errorText = document.getElementById('errorText');
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const passwordRules = document.getElementById('passwordRules');
-        const changePasswordModal = document.getElementById('changePasswordModal');
-        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
-        const cancelChangePasswordBtn = document.getElementById('cancelChangePassword');
-        const submitChangePasswordBtn = document.getElementById('submitChangePassword');
-
-        // ========== PASSWORD VALIDATION FUNCTIONS ==========
-        function validatePassword(password) {
-            const rules = {
-                length: password.length >= SECURITY_CONFIG.MIN_PASSWORD_LENGTH,
-                uppercase: SECURITY_CONFIG.REQUIRE_UPPERCASE ? /[A-Z]/.test(password) : true,
-                lowercase: SECURITY_CONFIG.REQUIRE_LOWERCASE ? /[a-z]/.test(password) : true,
-                number: SECURITY_CONFIG.REQUIRE_NUMBER ? /\d/.test(password) : true,
-                special: SECURITY_CONFIG.REQUIRE_SPECIAL_CHAR ? 
-                    new RegExp(`[${SECURITY_CONFIG.SPECIAL_CHARS}]`).test(password) : true
-            };
-            return {
-                isValid: Object.values(rules).every(rule => rule === true),
-                rules: rules
-            };
-        }
-
-        function updatePasswordRuleDisplay(password, prefix = '') {
-            const validation = validatePassword(password);
-            const ruleIds = ['Length', 'Uppercase', 'Lowercase', 'Number', 'Special'];
-            
-            ruleIds.forEach(rule => {
-                const element = document.getElementById(`${prefix}rule${rule}`);
-                if (element) {
-                    element.className = validation.rules[rule.toLowerCase()] ? 'valid' : 'invalid';
-                }
-            });
-            
-            return validation.isValid;
-        }
-
-        // ========== CREDENTIALS MANAGEMENT ==========
-        function getStoredCredentials() {
-            const stored = localStorage.getItem(SECURITY_CONFIG.STORAGE_KEY);
-            return stored ? JSON.parse(stored) : null;
-        }
-
-        function setStoredCredentials(username, password) {
-            const credentials = { username, password, changed: true };
-            localStorage.setItem(SECURITY_CONFIG.STORAGE_KEY, JSON.stringify(credentials));
-        }
-
-        function checkIfPasswordChanged() {
-            const stored = getStoredCredentials();
-            return stored && stored.changed === true;
-        }
-
-        // ========== LOGIN LOGIC ==========
-        function attemptLogin(username, password) {
-            const storedCreds = getStoredCredentials();
-            
-            // Check if using stored credentials (after password change)
-            if (storedCreds && storedCreds.changed) {
-                return username === storedCreds.username && password === storedCreds.password;
-            }
-            
-            // Check if using default credentials (before password change)
-            // For demo: username can be 'admin' or 'admin@bluemoon.com'
-            const isDefaultUser = username === 'admin' || username === 'admin@bluemoon.com';
-            const isDefaultPassword = password === SECURITY_CONFIG.DEFAULT_PASSWORD;
-            
-            return isDefaultUser && isDefaultPassword;
-        }
-
-        // ========== EVENT LISTENERS ==========
-        // Toggle password visibility
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            const eyeIcon = togglePassword.querySelector('i');
-            eyeIcon.classList.toggle('fa-eye');
-            eyeIcon.classList.toggle('fa-eye-slash');
-        });
-
-        // Real-time password validation display
-        passwordInput.addEventListener('input', function() {
-            updatePasswordRuleDisplay(this.value);
-        });
-
-        // New password validation (in modal)
-        document.getElementById('newPassword').addEventListener('input', function() {
-            updatePasswordRuleDisplay(this.value, 'new');
-        });
-
-        // Form submission
-        loginForm.addEventListener('submit', function(e) {
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('username').value.trim();
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('rememberMe').checked;
-
-            // Hide previous alerts
-            errorAlert.style.display = 'none';
-            successAlert.style.display = 'none';
-
-            // Validation
-            if (!username || !password) {
-                showError('Please fill in all fields');
-                return;
-            }
-
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Default credentials
+            const adminUsername = 'admin';
+            const adminPassword = 'B@ngladesh2026$';
+            
             // Check credentials
-            if (attemptLogin(username, password)) {
-                // Save to localStorage if "Remember me" is checked
-                if (rememberMe) {
-                    localStorage.setItem('adminUsername', username);
-                    localStorage.setItem('adminRemembered', 'true');
-                } else {
-                    localStorage.removeItem('adminUsername');
-                    localStorage.removeItem('adminRemembered');
-                }
-                
-                // Save session
+            if (username === adminUsername && password === adminPassword) {
+                // Save login state
                 sessionStorage.setItem('adminLoggedIn', 'true');
                 sessionStorage.setItem('adminUsername', username);
                 
-                // Check if still using default password
-                const storedCreds = getStoredCredentials();
-                const isDefaultPassword = !storedCreds && password === SECURITY_CONFIG.DEFAULT_PASSWORD;
-                
-                if (isDefaultPassword) {
-                    // Force password change before proceeding
-                    showChangePasswordModal(username);
-                } else {
-                    // Proceed to dashboard
-                    showSuccessAndRedirect();
-                }
-            } else {
-                showError('Invalid username or password.');
-            }
-        });
-
-        // Forgot password
-        forgotPasswordLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value.trim() || 'admin';
-            showChangePasswordModal(username, true);
-        });
-
-        // Change password modal handlers
-        cancelChangePasswordBtn.addEventListener('click', function() {
-            changePasswordModal.style.display = 'none';
-        });
-
-        submitChangePasswordBtn.addEventListener('click', function() {
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const username = document.getElementById('username').value.trim() || 'admin';
-            
-            // Validate current password
-            const storedCreds = getStoredCredentials();
-            const isCurrentPasswordValid = storedCreds ? 
-                currentPassword === storedCreds.password : 
-                currentPassword === SECURITY_CONFIG.DEFAULT_PASSWORD;
-            
-            if (!isCurrentPasswordValid) {
-                alert('Current password is incorrect.');
-                return;
-            }
-            
-            // Validate new password
-            if (newPassword !== confirmPassword) {
-                alert('New passwords do not match.');
-                return;
-            }
-            
-            const isNewPasswordValid = updatePasswordRuleDisplay(newPassword, 'new');
-            if (!isNewPasswordValid) {
-                alert('New password does not meet security requirements.');
-                return;
-            }
-            
-            // Don't allow reusing the default password
-            if (newPassword === SECURITY_CONFIG.DEFAULT_PASSWORD) {
-                alert('New password cannot be the same as the default password.');
-                return;
-            }
-            
-            // Store new credentials
-            setStoredCredentials(username, newPassword);
-            
-            // Close modal and show success
-            changePasswordModal.style.display = 'none';
-            alert('Password changed successfully! Please login with your new password.');
-            
-            // Clear form
-            document.getElementById('password').value = '';
-            document.getElementById('currentPassword').value = '';
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
-        });
-
-        // ========== UI HELPER FUNCTIONS ==========
-        function showError(message) {
-            errorText.textContent = message;
-            errorAlert.style.display = 'flex';
-            
-            // Shake animation for error
-            loginForm.style.animation = 'none';
-            setTimeout(() => {
-                loginForm.style.animation = 'shake 0.5s';
-            }, 10);
-            
-            setTimeout(() => {
-                loginForm.style.animation = '';
-            }, 500);
-        }
-
-        function showSuccessAndRedirect() {
-            successAlert.style.display = 'flex';
-            setTimeout(() => {
+                // Redirect to dashboard
                 window.location.href = 'admin-dashboard.html';
-            }, 1500);
-        }
-
-        function showChangePasswordModal(username, isForgotPassword = false) {
-            document.getElementById('username').value = username;
-            changePasswordModal.style.display = 'flex';
-            
-            // Pre-fill current password field if it's a forgot password request
-            if (isForgotPassword) {
-                document.getElementById('currentPassword').placeholder = 'Contact administrator for reset';
-                document.getElementById('currentPassword').readOnly = true;
-                document.getElementById('currentPassword').value = '';
             } else {
-                document.getElementById('currentPassword').placeholder = 'Enter current password (admin123)';
-                document.getElementById('currentPassword').readOnly = false;
+                errorMessage.style.display = 'block';
+                // Shake animation
+                this.style.animation = 'shake 0.5s';
+                setTimeout(() => this.style.animation = '', 500);
             }
-            
-            // Clear other fields
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
-            
-            // Reset validation display
-            updatePasswordRuleDisplay('', 'new');
-        }
-
-        // ========== INITIALIZATION ==========
-        window.addEventListener('DOMContentLoaded', function() {
-            // Check for remembered username
-            const remembered = localStorage.getItem('adminRemembered');
-            const savedUsername = localStorage.getItem('adminUsername');
-            
-            if (remembered && savedUsername) {
-                document.getElementById('username').value = savedUsername;
-                document.getElementById('rememberMe').checked = true;
-            }
-            
-            // Add shake animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                    20%, 40%, 60%, 80% { transform: translateX(5px); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Security warning in console
-            console.warn('SECURITY NOTICE: This demo uses localStorage for credentials. In production, implement proper server-side authentication.');
         });
 
-        // ========== SECURITY ENHANCEMENTS (For Production) ==========
-        /*
-        IMPORTANT: For a real application, you MUST implement:
-        1. Server-side authentication (never trust client-side validation)
-        2. Password hashing (use bcrypt, Argon2, etc.)
-        3. HTTPS for all communication
-        4. Rate limiting on login attempts
-        5. Session management with secure cookies
-        6. Logging and monitoring of login attempts
-        7. Regular password expiration policy
-        8. Multi-factor authentication (MFA)
-        
-        This code is for demonstration only and should not be used in production
-        without proper security implementation.
-        */
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
