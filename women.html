@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Women | Blue Moon</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #ffffff;
+      color: #111;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: #000;
+      color: #fff;
+      padding: 15px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #caa23d;
+    }
+
+    /* ===== PAGE TITLE ===== */
+    .page-title {
+      text-align: center;
+      padding: 50px 20px 20px;
+    }
+
+    .page-title h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .page-title p {
+      color: #666;
+    }
+
+    /* ===== PRODUCT GRID ===== */
+    .products {
+      max-width: 1200px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-info h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+    }
+
+    .product-info p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .price {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      background: #caa23d;
+      color: #000;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #b8922f;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #000;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>BLUEMOON</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="women.html">Women</a>
+      <a href="men.html">Men</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ===== PAGE TITLE ===== -->
+  <div class="page-title">
+    <h2>Women Collection</h2>
+    <p>Elegant, modern, and timeless styles for women</p>
+  </div>
+
+  <!-- ===== PRODUCTS ===== -->
+  <section class="products">
+
+    <!-- PRODUCT 1 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1520975922284-6c2c1f6b82f3" alt="Women Bag">
+      <div class="product-info">
+        <h3>Black Shoulder Bag</h3>
+        <p>Premium leather finish</p>
+        <div class="price">$120.00</div>
+        <a href="#" class="btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475" alt="Women Dress">
+      <div class="product-info">
+        <h3>Elegant Evening Dress</h3>
+        <p>Perfect for special occasions</p>
+        <div class="price">$180.00</div>
+        <a href="#" class="btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb" alt="Women Shoes">
+      <div class="product-info">
+        <h3>Classic Heels</h3>
+        <p>Comfort meets style</p>
+        <div class="price">$95.00</div>
+        <a href="#" class="btn">View Details</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    © 2025 Blue Moon. All rights reserved.
+  </footer>
+
+</body>
+</html>
