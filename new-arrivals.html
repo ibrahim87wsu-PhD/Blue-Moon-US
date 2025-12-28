@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Arrivals | Blue Moon</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#fff;color:#111;line-height:1.5}
+    .container{width:92%;max-width:1280px;margin:0 auto}
+    .topbar{background:#f5f5f5;color:#222;padding:8px 0;font-size:.85rem;text-align:center}
+
+    header{background:#fff;border-bottom:1px solid #e9e9e9;position:sticky;top:0;z-index:999}
+    .header-main{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0}
+    .logo{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;text-decoration:none;color:#111;letter-spacing:1px;white-space:nowrap}
+    .logo span{color:#b8860b}
+    .mobile-btn{display:none;background:none;border:none;font-size:22px;cursor:pointer}
+    .nav{display:flex;gap:18px;list-style:none;align-items:center}
+    .nav a{text-decoration:none;color:#111;font-weight:600;font-size:14px;padding:6px 2px;border-bottom:2px solid transparent}
+    .nav a:hover{border-bottom-color:#b8860b}
+    .nav a.active{border-bottom-color:#111}
+    .icons{display:flex;gap:16px;align-items:center}
+    .icons a{color:#111;font-size:18px;text-decoration:none}
+    .icons a:hover{color:#b8860b}
+
+    .page-head{padding:26px 0 16px;border-bottom:1px solid #eee}
+    .page-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700}
+    .page-sub{color:#666;margin-top:6px;font-size:14px}
+    .toolbar{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .toolbar input,.toolbar select{padding:10px 12px;border:1px solid #ddd;border-radius:10px;font-size:14px;min-width:220px}
+    .pill{margin-left:auto;font-size:13px;color:#666}
+
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:22px 0 70px}
+    @media (max-width:1100px){ .grid{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:520px){ .grid{grid-template-columns:1fr} }
+
+    .card{border:1px solid #eee;border-radius:14px;overflow:hidden;background:#fff;transition:.15s}
+    .card:hover{box-shadow:0 12px 30px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .imgwrap{background:#fafafa;width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .imgwrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .info{padding:14px 14px 16px}
+    .name{font-weight:800;font-size:14px;margin-bottom:8px}
+    .price{font-weight:900;font-size:14px;margin-bottom:6px}
+    .strike{color:#999;text-decoration:line-through;font-weight:700;font-size:12px;margin-left:8px}
+    .meta{font-size:12px;color:#666;margin-bottom:12px}
+    .tag{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:900;margin-bottom:10px}
+    .btn{width:100%;padding:11px 12px;border:none;border-radius:10px;background:#111;color:#fff;cursor:pointer;font-weight:900;font-size:13px;transition:.15s}
+    .btn:hover{background:#b8860b}
+
+    .cart-float{position:fixed;bottom:20px;right:20px;z-index:9999;display:none}
+    .cart-float button{background:#111;color:#fff;border:none;border-radius:999px;padding:12px 14px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.2);display:flex;gap:10px;align-items:center}
+    .badge{background:#b8860b;color:#fff;border-radius:999px;padding:2px 8px;font-weight:900;font-size:12px}
+
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:14px;z-index:10000}
+    .modal{background:#fff;border-radius:14px;width:100%;max-width:760px;max-height:85vh;overflow:auto;padding:18px}
+    .row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee;flex-wrap:wrap}
+    .qty button{border:1px solid #ddd;background:#f5f5f5;padding:6px 10px;border-radius:10px;cursor:pointer;font-weight:900}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .secondary{background:#666}
+    .secondary:hover{background:#444}
+
+    footer{border-top:1px solid #eee;padding:25px 0;color:#666;font-size:13px}
+    footer a{color:#b8860b;text-decoration:none}
+
+    @media (max-width:920px){
+      .mobile-btn{display:block}
+      .nav{display:none;flex-direction:column;align-items:flex-start;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid #eee;padding:14px 0}
+      .nav.show{display:flex}
+      .nav li{width:100%}
+      .nav a{display:block;padding:10px 0;width:92%;margin:0 auto}
+      .pill{margin-left:0}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">FREE SHIPPING ON ORDERS OVER $100 | 30-DAY RETURN POLICY</div>
+
+  <header>
+    <div class="container header-main">
+      <a class="logo" href="index.html">BLUE<span>MOON</span></a>
+
+      <button class="mobile-btn" type="button" onclick="toggleNav()">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <ul class="nav" id="navMenu">
+        <li><a class="active" href="new-arrivals.html">New Arrivals</a></li>
+        <li><a href="women.html">Women</a></li>
+        <li><a href="men.html">Men</a></li>
+        <li><a href="beauty.html">Beauty</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="sale.html">Sale</a></li>
+      </ul>
+
+      <div class="icons">
+        <a href="#" onclick="showCart();return false;"><i class="fas fa-shopping-bag"></i></a>
+        <a href="admin-login.html" title="Admin"><i class="fas fa-user-cog"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="container page-head">
+    <div class="page-title">New Arrivals</div>
+    <div class="page-sub">The latest pieces added to Blue Moon</div>
+
+    <div class="toolbar">
+      <input id="q" type="text" placeholder="Search new arrivals..." oninput="applyFilters()" />
+      <select id="sort" onchange="applyFilters()">
+        <option value="newest">Sort: Newest</option>
+        <option value="priceLow">Price: Low → High</option>
+        <option value="priceHigh">Price: High → Low</option>
+        <option value="nameAZ">Name: A → Z</option>
+      </select>
+      <div class="pill"><span id="count">0</span> products</div>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>Blue Moon Luxury Fashion</strong> • Need help? <a href="tel:+19473331682">+1 (947)-333-1682</a></p>
+      <p style="margin-top:8px;">© 2024 Blue Moon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="cart-float" id="cartFloat">
+    <button onclick="showCart()">
+      <i class="fas fa-shopping-bag"></i>
+      Cart <span class="badge" id="cartBadge">0</span>
+    </button>
+  </div>
+
+  <script>
+    const PRODUCTS_KEY = "blueMoonProducts";
+    const CART_KEY = "blueMoonCart";
+
+    let cart = safeParse(localStorage.getItem(CART_KEY), []);
+    let all = [];
+    let view = [];
+
+    const fallback = [
+      { id: 1, name: "GG Marmont Mini Bag", price: 980, category:"Women", stock: 15, status:"In Stock",
+        image:"https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+        description:"Luxury designer handbag with gold hardware.", date: new Date().toISOString()
+      },
+      { id: 2, name: "Men's Leather Bifold Wallet", price: 320, category:"Men", stock: 20, status:"In Stock",
+        image:"https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+        description:"Premium leather wallet with classic finish.", date: new Date().toISOString()
+      }
+    ];
+
+    function safeParse(str, fallbackVal){
+      try{ const v = JSON.parse(str); return v ?? fallbackVal; }
+      catch(e){ return fallbackVal; }
+    }
+    function toggleNav(){ document.getElementById("navMenu").classList.toggle("show"); }
+    function escapeHtml(s){
+      return String(s||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    }
+
+    function init(){
+      const admin = safeParse(localStorage.getItem(PRODUCTS_KEY), []);
+      const list = (Array.isArray(admin) && admin.length) ? admin : fallback;
+
+      // New Arrivals = newest products (all categories)
+      all = [...list].sort((a,b)=>new Date(b.date||0)-new Date(a.date||0)).slice(0, 60);
+      view = [...all];
+
+      applyFilters();
+      updateCartUI();
+    }
+
+    function applyFilters(){
+      const q = (document.getElementById("q").value || "").toLowerCase().trim();
+      const sort = document.getElementById("sort").value;
+
+      view = all.filter(p=>{
+        const t = `${p.name||""} ${p.description||""} ${p.category||""}`.toLowerCase();
+        return t.includes(q);
+      });
+
+      if(sort==="priceLow") view.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
+      if(sort==="priceHigh") view.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
+      if(sort==="nameAZ") view.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
+      if(sort==="newest") view.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
+
+      render();
+    }
+
+    function render(){
+      const grid = document.getElementById("grid");
+      document.getElementById("count").textContent = view.length;
+
+      if(!view.length){
+        grid.innerHTML = `
+          <div style="grid-column:1/-1;border:1px solid #eee;border-radius:14px;padding:18px;">
+            <h3 style="margin-bottom:6px;">No products found</h3>
+            <p style="color:#666;">Add products in <strong>admin-products.html</strong>.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = view.map(p=>{
+        const isNew = (Date.now() - new Date(p.date||Date.now()).getTime()) < (14*24*60*60*1000);
+        return `
+          <div class="card">
+            <div class="imgwrap">
+              <img src="${escapeHtml(p.image||"")}" alt="${escapeHtml(p.name||"Product")}"
+                   onerror="this.src='https://images.unsplash.com/photo-1520975958225-4f6c55f2d0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80'">
+            </div>
+            <div class="info">
+              ${isNew ? `<div class="tag">NEW</div>` : ``}
+              <div class="name">${escapeHtml(p.name||"")}</div>
+              <div class="price">$${Number(p.price||0).toFixed(2)}</div>
+              <div class="meta">${escapeHtml(p.category||"")} • ${escapeHtml(p.status||"In Stock")}</div>
+              <button class="btn" onclick='addToCart(${JSON.stringify({
+                name: p.name,
+                price: Number(p.price||0),
+                image: p.image||"",
+                category: p.category||""
+              }).replaceAll("'", "\\'")})'>Add to Cart</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function updateCartUI(){
+      const total = cart.reduce((t,i)=>t+Number(i.quantity||0),0);
+      document.getElementById("cartBadge").textContent = total;
+      document.getElementById("cartFloat").style.display = total>0 ? "block" : "none";
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
+    function addToCart(product){
+      if(!product || !product.name) return;
+      const existing = cart.find(i=>i.name===product.name);
+      if(existing) existing.quantity += 1;
+      else cart.push({...product, id: Date.now(), quantity: 1});
+      updateCartUI();
+      alert(`Added "${product.name}" to cart!`);
+    }
+
+    function showCart(){
+      if(!cart.length){ alert("Your cart is empty!"); return; }
+      document.querySelector(".overlay")?.remove();
+
+      const html = `
+        <div class="overlay" onclick="if(event.target.classList.contains('overlay')) closeCart()">
+          <div class="modal">
+            <h2 style="margin-bottom:10px;">🛒 Your Cart</h2>
+
+            ${cart.map((it,idx)=>`
+              <div class="row">
+                <div>
+                  <strong>${escapeHtml(it.name)}</strong><br/>
+                  <span style="color:#666;font-size:13px;">$${Number(it.price||0).toFixed(2)} each</span>
+                </div>
+                <div class="qty">
+                  <button onclick="changeQty(${idx},-1)">-</button>
+                  <span style="display:inline-block;min-width:28px;text-align:center;font-weight:900;">${it.quantity}</span>
+                  <button onclick="changeQty(${idx},1)">+</button>
+                  <span style="margin-left:12px;font-weight:900;">$${(Number(it.price||0)*Number(it.quantity||0)).toFixed(2)}</span>
+                </div>
+              </div>
+            `).join("")}
+
+            <div style="padding-top:12px;">
+              <p>Subtotal: <strong>$${subtotal().toFixed(2)}</strong></p>
+              <p>Total (8% tax): <strong>$${(subtotal()*1.08).toFixed(2)}</strong></p>
+            </div>
+
+            <div class="actions">
+              <button class="btn secondary" onclick="closeCart()">Continue Shopping</button>
+              <button class="btn" onclick="alert('Payment gateway will be added (Stripe/PayPal).')">Checkout</button>
+            </div>
+          </div>
+        </div>
+      `;
+      const wrap = document.createElement("div");
+      wrap.innerHTML = html;
+      document.body.appendChild(wrap);
+    }
+
+    function closeCart(){ document.querySelector(".overlay")?.remove(); }
+    function changeQty(i,delta){
+      if(!cart[i]) return;
+      cart[i].quantity += delta;
+      if(cart[i].quantity <= 0) cart.splice(i,1);
+      updateCartUI();
+      showCart();
+    }
+    function subtotal(){
+      return cart.reduce((s,i)=>s + (Number(i.price||0)*Number(i.quantity||0)), 0);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
