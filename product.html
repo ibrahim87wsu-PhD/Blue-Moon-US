@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Product - Blue Moon</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Inter,Arial,sans-serif;color:#222;background:#fff}
+    a{text-decoration:none;color:inherit}
+    .container{width:92%;max-width:1200px;margin:0 auto}
+
+    /* Simple top nav */
+    header{border-bottom:1px solid #eee;background:#fff;position:sticky;top:0;z-index:1000}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{font-family:"Playfair Display",serif;font-weight:800;font-size:28px}
+    .logo span{color:#b8860b}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{font-weight:600;color:#333}
+    .menu a:hover{color:#b8860b}
+
+    /* Layout */
+    .page{padding:22px 0 60px}
+    .crumbs{color:#777;font-size:14px;margin-bottom:14px}
+    .grid{display:grid;grid-template-columns:1.25fr .9fr;gap:24px;align-items:start}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:90px 1fr;gap:16px}
+    .thumbs{display:flex;flex-direction:column;gap:10px;max-height:560px;overflow:auto;padding-right:4px}
+    .thumb{border:1px solid #eee;border-radius:12px;overflow:hidden;width:90px;height:90px;cursor:pointer;background:#fafafa}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb.active{outline:3px solid rgba(184,134,11,.35);border-color:#b8860b}
+    .main-img{border:1px solid #eee;border-radius:16px;overflow:hidden;background:#fafafa;min-height:560px;display:flex;align-items:center;justify-content:center;position:relative}
+    .main-img img{width:100%;height:100%;object-fit:contain;display:block}
+    .fav{position:absolute;top:14px;right:14px;background:#fff;border:1px solid #eee;border-radius:999px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .fav:hover{border-color:#b8860b;color:#b8860b}
+
+    /* Details */
+    h1{font-family:"Playfair Display",serif;font-size:34px;margin-bottom:10px}
+    .price{font-size:26px;font-weight:800;color:#111;margin:10px 0}
+    .compare{font-size:16px;color:#777;text-decoration:line-through;margin-left:10px;font-weight:600}
+    .badge{display:inline-block;background:#f5efe0;color:#7a5c07;border:1px solid #e7d7ad;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}
+    .desc{color:#444;margin:14px 0;line-height:1.6}
+
+    .btn{width:100%;border:none;border-radius:12px;padding:14px 16px;font-weight:800;cursor:pointer;display:flex;gap:10px;align-items:center;justify-content:center}
+    .btn-add{background:#000;color:#fff;margin-top:14px}
+    .btn-add:hover{opacity:.92}
+    .btn-buy{background:#7BC96F;color:#fff;margin-top:10px}
+    .btn-buy:hover{opacity:.92}
+    .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:#444;font-weight:600}
+    .qty{display:flex;align-items:center;gap:10px;margin-top:14px}
+    .qty button{width:40px;height:40px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer;font-size:18px}
+    .qty input{width:70px;text-align:center;border:1px solid #eee;border-radius:10px;padding:10px;font-weight:800}
+
+    .note{margin-top:14px;color:#777;font-size:13px}
+
+    @media(max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      .thumbs{flex-direction:row;max-height:none;overflow:auto}
+      .thumb{width:84px;height:84px}
+      .main-img{min-height:420px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">BLUE<span>MOON</span></a>
+      <nav class="menu">
+        <a href="new-arrivals.html">New</a>
+        <a href="women.html">Women</a>
+        <a href="men.html">Men</a>
+        <a href="beauty.html">Beauty</a>
+        <a href="accessories.html">Accessories</a>
+        <a href="sale.html">Sale</a>
+        <a href="#" onclick="openCart();return false;"><i class="fa-solid fa-bag-shopping"></i></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="crumbs" id="crumbs">Home / Product</div>
+
+    <div class="grid">
+      <!-- Gallery -->
+      <section class="gallery">
+        <div class="thumbs" id="thumbs"></div>
+
+        <div class="main-img">
+          <button class="fav" title="Wishlist (demo)">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <img id="mainImage" alt="Product image" />
+        </div>
+      </section>
+
+      <!-- Details -->
+      <aside>
+        <div class="badge" id="badge">IN STOCK</div>
+        <h1 id="title">Product</h1>
+
+        <div class="price">
+          <span id="price">$0.00</span>
+          <span class="compare" id="compare" style="display:none">$0.00</span>
+        </div>
+
+        <div class="desc" id="desc"></div>
+
+        <div class="row">
+          <span>Category</span>
+          <span id="category">-</span>
+        </div>
+
+        <div class="qty">
+          <button type="button" onclick="changeQty(-1)">−</button>
+          <input id="qty" value="1" />
+          <button type="button" onclick="changeQty(1)">+</button>
+        </div>
+
+        <button class="btn btn-add" onclick="addToCart()">
+          <i class="fa-solid fa-bag-shopping"></i> ADD TO BAG
+        </button>
+
+        <button class="btn btn-buy" onclick="buyNow()">
+          BUY NOW
+        </button>
+
+        <div class="note">
+          * This is a static demo checkout. For real payment gateway you need a backend (Stripe/PayPal).
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const KEY_PRODUCTS = 'blueMoonProducts';
+    const KEY_CART = 'blueMoonCart';
+
+    let product = null;
+
+    function money(n){ return `$${Number(n||0).toFixed(2)}`; }
+
+    function readParam(name){
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    function loadProduct(){
+      const id = readParam('id');
+      const all = JSON.parse(localStorage.getItem(KEY_PRODUCTS) || '[]');
+      product = all.find(p => String(p.id) === String(id)) || null;
+
+      if(!product){
+        document.getElementById('title').textContent = 'Product not found';
+        document.getElementById('desc').textContent = 'Go back and choose a product again.';
+        document.getElementById('mainImage').removeAttribute('src');
+        return;
+      }
+
+      document.title = `${product.name} - Blue Moon`;
+      document.getElementById('title').textContent = product.name;
+      document.getElementById('price').textContent = money(product.price);
+
+      const compareEl = document.getElementById('compare');
+      if(product.compareAt && Number(product.compareAt) > Number(product.price)){
+        compareEl.style.display = 'inline';
+        compareEl.textContent = money(product.compareAt);
+      } else {
+        compareEl.style.display = 'none';
+      }
+
+      document.getElementById('desc').textContent = product.description || '';
+      document.getElementById('category').textContent = product.category || '-';
+
+      const badge = document.getElementById('badge');
+      badge.textContent = (product.status || 'In Stock').toUpperCase();
+      badge.style.background = product.status === 'Out of Stock' ? '#f8d7da' : (product.status === 'Low Stock' ? '#fff3cd' : '#f5efe0');
+      badge.style.color = product.status === 'Out of Stock' ? '#721c24' : (product.status === 'Low Stock' ? '#856404' : '#7a5c07');
+      badge.style.borderColor = product.status === 'Out of Stock' ? '#f1aeb5' : (product.status === 'Low Stock' ? '#f5d6a1' : '#e7d7ad');
+
+      document.getElementById('crumbs').textContent = `Home / ${product.category || 'Products'} / ${product.name}`;
+
+      buildGallery(product.images || []);
+    }
+
+    function buildGallery(images){
+      const thumbs = document.getElementById('thumbs');
+      thumbs.innerHTML = '';
+
+      const safe = (images && images.length) ? images : ['https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=80'];
+
+      // Main image
+      setMain(safe[0]);
+
+      safe.slice(0,6).forEach((url, idx) => {
+        const div = document.createElement('div');
+        div.className = 'thumb' + (idx===0 ? ' active' : '');
+        div.innerHTML = `<img src="${url}" alt="thumb">`;
+        div.onclick = () => {
+          document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+          div.classList.add('active');
+          setMain(url);
+        };
+        thumbs.appendChild(div);
+      });
+    }
+
+    function setMain(url){
+      const img = document.getElementById('mainImage');
+      img.src = url;
+      img.onerror = () => { img.removeAttribute('src'); };
+    }
+
+    function changeQty(delta){
+      const el = document.getElementById('qty');
+      let v = parseInt(el.value || '1', 10);
+      if(isNaN(v)) v = 1;
+      v = Math.max(1, v + delta);
+      el.value = v;
+    }
+
+    function addToCart(){
+      if(!product) return;
+
+      const qty = Math.max(1, parseInt(document.getElementById('qty').value || '1', 10) || 1);
+      const cart = JSON.parse(localStorage.getItem(KEY_CART) || '[]');
+
+      const existing = cart.find(i => String(i.id) === String(product.id));
+      if(existing){
+        existing.quantity += qty;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: (product.images && product.images.length) ? product.images[0] : '',
+          quantity: qty
+        });
+      }
+
+      localStorage.setItem(KEY_CART, JSON.stringify(cart));
+      alert('Added to bag!');
+    }
+
+    function buyNow(){
+      addToCart();
+      alert('For real payments you must connect Stripe/PayPal with a backend (not possible in pure GitHub Pages).');
+    }
+
+    function openCart(){
+      const cart = JSON.parse(localStorage.getItem(KEY_CART) || '[]');
+      if(cart.length === 0){ alert('Your bag is empty.'); return; }
+      const total = cart.reduce((s,i)=> s + i.price*i.quantity, 0);
+      alert(
+        'Your Bag:\n\n' +
+        cart.map(i => `${i.name} x${i.quantity} = ${money(i.price*i.quantity)}`).join('\n') +
+        `\n\nTotal: ${money(total)}`
+      );
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProduct);
+  </script>
+</body>
+</html>
