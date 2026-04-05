@@ -7,6 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -223,15 +224,27 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .pill {
       border: 1px solid #d8d2c7;
-      padding: 6px 10px;
+      padding: 8px 12px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
       background: #faf8f4;
+      min-width: 64px;
+      text-align: center;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pill i,
+    .tiny-badge i {
+      font-size: 24px;
+      line-height: 1;
     }
 
     .payment-details {
@@ -413,10 +426,15 @@
       background: #f7f3ea;
       border: 1px solid #e5dccd;
       color: #5a4a24;
-      padding: 7px 10px;
+      padding: 8px 12px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
+      min-width: 54px;
+      text-align: center;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
     }
 
     @media (max-width: 980px) {
@@ -585,8 +603,8 @@
               </div>
             </div>
             <div class="pay-icons">
-              <span class="pill">VISA</span>
-              <span class="pill">MASTERCARD</span>
+              <span class="pill"><i class="fa-brands fa-cc-visa"></i></span>
+              <span class="pill"><i class="fa-brands fa-cc-mastercard"></i></span>
             </div>
           </label>
 
@@ -599,8 +617,8 @@
               </div>
             </div>
             <div class="pay-icons">
-              <span class="pill">APPLE PAY</span>
-              <span class="pill">GOOGLE PAY</span>
+              <span class="pill"><i class="fa-brands fa-apple-pay"></i></span>
+              <span class="pill"><i class="fa-brands fa-google-pay"></i></span>
             </div>
           </label>
 
@@ -613,7 +631,7 @@
               </div>
             </div>
             <div class="pay-icons">
-              <span class="pill">PAYPAL</span>
+              <span class="pill"><i class="fa-brands fa-paypal"></i></span>
             </div>
           </label>
         </div>
@@ -655,8 +673,8 @@
               On the real live version, Stripe will show Apple Pay or Google Pay automatically on supported devices and browsers.
             </p>
             <div class="wallet-buttons">
-              <button class="wallet-btn apple" type="button"> Pay</button>
-              <button class="wallet-btn google" type="button">G Pay</button>
+              <button class="wallet-btn apple" type="button"><i class="fa-brands fa-apple-pay"></i></button>
+              <button class="wallet-btn google" type="button"><i class="fa-brands fa-google-pay"></i></button>
             </div>
           </div>
 
@@ -665,7 +683,7 @@
               On the real live version, this button will redirect customers securely to PayPal Checkout.
             </p>
             <div class="wallet-buttons">
-              <button class="wallet-btn paypal" type="button">Pay with PayPal</button>
+              <button class="wallet-btn paypal" type="button"><i class="fa-brands fa-paypal"></i></button>
             </div>
           </div>
         </div>
@@ -727,11 +745,11 @@
         </div>
 
         <div class="badge-row">
-          <div class="tiny-badge">Visa</div>
-          <div class="tiny-badge">Mastercard</div>
-          <div class="tiny-badge">Apple Pay</div>
-          <div class="tiny-badge">Google Pay</div>
-          <div class="tiny-badge">PayPal</div>
+          <div class="tiny-badge"><i class="fa-brands fa-cc-visa"></i></div>
+          <div class="tiny-badge"><i class="fa-brands fa-cc-mastercard"></i></div>
+          <div class="tiny-badge"><i class="fa-brands fa-apple-pay"></i></div>
+          <div class="tiny-badge"><i class="fa-brands fa-google-pay"></i></div>
+          <div class="tiny-badge"><i class="fa-brands fa-paypal"></i></div>
         </div>
 
         <div class="mini-links">
