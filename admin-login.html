@@ -1,205 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Blue Moon</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login - Blue Moon</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    :root {
+      --gold: #b8860b;
+      --gold-dark: #9c7009;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --danger: #dc3545;
+      --border: #e5e7eb;
+      --white: #ffffff;
+    }
 
-        .login-container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 400px;
-        }
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      background: var(--white);
+      border-radius: 18px;
+      padding: 38px 30px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
+    }
 
-        .logo h1 {
-            font-family: 'Playfair Display', serif;
-            color: #000;
-            font-size: 2.5rem;
-        }
+    .logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
 
-        .logo span {
-            color: #b8860b;
-        }
+    .logo h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.4rem;
+      color: #111827;
+      letter-spacing: 0.5px;
+    }
 
-        .logo p {
-            color: #666;
-            margin-top: 5px;
-            font-size: 0.9rem;
-        }
+    .logo span {
+      color: var(--gold);
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .logo p {
+      color: var(--muted);
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-        }
+    .form-group {
+      margin-bottom: 18px;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 15px;
+    }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #b8860b;
-        }
+    .form-group input {
+      width: 100%;
+      padding: 13px 15px;
+      border: 2px solid #dcdfe4;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
 
-        .login-btn {
-            width: 100%;
-            background: #b8860b;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(184, 134, 11, 0.12);
+    }
 
-        .login-btn:hover {
-            background: #9c7009;
-        }
+    .login-btn {
+      width: 100%;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.25s ease;
+      margin-top: 6px;
+    }
 
-        .error-message {
-            color: #ff4444;
-            text-align: center;
-            margin-top: 15px;
-            display: none;
-        }
+    .login-btn:hover {
+      background: var(--gold-dark);
+    }
 
-        .back-link {
-            text-align: center;
-            margin-top: 30px;
-        }
+    .error-message {
+      display: none;
+      margin-top: 14px;
+      text-align: center;
+      color: var(--danger);
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-        .back-link a {
-            color: #666;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
+    .back-link {
+      text-align: center;
+      margin-top: 28px;
+    }
 
-        .back-link a:hover {
-            text-decoration: underline;
-        }
+    .back-link a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 30px 20px;
-            }
-        }
-    </style>
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 28px 20px;
+      }
+
+      .logo h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo">
-            <h1>BLUE<span>MOON</span></h1>
-            <p>Admin Login</p>
-        </div>
-
-        <form id="adminLoginForm">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter admin username" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter admin password" required>
-            </div>
-
-            <div class="error-message" id="errorMessage">
-                Invalid username or password
-            </div>
-
-            <button type="submit" class="login-btn">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </form>
-
-        <!-- REMOVED: Public password display section -->
-        
-        <div class="back-link">
-            <a href="index.html">
-                <i class="fas fa-arrow-left"></i> Back to Store
-            </a>
-        </div>
+  <div class="login-container">
+    <div class="logo">
+      <h1>BLUE<span>MOON</span></h1>
+      <p>Admin Login</p>
     </div>
 
-    <script>
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-            
-            // Admin credentials
-            const adminUsername = 'admin';
-            const adminPassword = 'B@ngladesh2026$';  // Password kept as requested
-            
-            // Check credentials
-            if (username === adminUsername && password === adminPassword) {
-                // Save login state
-                sessionStorage.setItem('adminLoggedIn', 'true');
-                sessionStorage.setItem('adminUsername', username);
-                
-                // Redirect to dashboard
-                window.location.href = 'admin-dashboard.html';
-            } else {
-                errorMessage.style.display = 'block';
-                // Shake animation for wrong credentials
-                this.style.animation = 'shake 0.5s';
-                setTimeout(() => this.style.animation = '', 500);
-            }
-        });
+    <form id="adminLoginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter admin username" required>
+      </div>
 
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                20%, 40%, 60%, 80% { transform: translateX(5px); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter admin password" required>
+      </div>
+
+      <div class="error-message" id="errorMessage">
+        Invalid username or password
+      </div>
+
+      <button type="submit" class="login-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+    </form>
+
+    <div class="back-link">
+      <a href="index.html">
+        <i class="fas fa-arrow-left"></i> Back to Store
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_LOGIN_KEY = 'blueMoonAdminLoggedIn';
+    const ADMIN_USERNAME_KEY = 'blueMoonAdminUsername';
+
+    document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+
+      const adminUsername = 'admin';
+      const adminPassword = 'B@ngladesh2026$';
+
+      if (username === adminUsername && password === adminPassword) {
+        localStorage.setItem(ADMIN_LOGIN_KEY, 'true');
+        localStorage.setItem(ADMIN_USERNAME_KEY, username);
+
+        errorMessage.style.display = 'none';
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        errorMessage.style.display = 'block';
+        this.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+          this.style.animation = '';
+        }, 500);
+      }
+    });
+
+    if (localStorage.getItem(ADMIN_LOGIN_KEY) === 'true') {
+      // already logged in, optional redirect
+      // window.location.href = 'admin-dashboard.html';
+    }
+  </script>
 </body>
 </html>
